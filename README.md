@@ -1,22 +1,25 @@
 # vue-input-tag
 
-> A Vue.js 2.0 component
+> A Vue.js 2.0 input tag component
 
-## Build Setup
+
+
+## Installation
 
 ``` bash
-# install dependencies
-npm install
+npm install vue-time-picker --save-dev
+```
 
-# serve with hot reload at localhost:8080
-npm run dev
+and where do you want to use it:
 
-# build for production with minification
-npm run build
+```
+import InputTag from 'vue-input-tag'
+```
 
-# run unit tests
-npm run unit
+## Usage
 
+```
+<input-tag :on-change="callback" :tags="tagsArray"></input-tag>
 ```
 
 #### Props
