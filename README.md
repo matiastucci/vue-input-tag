@@ -12,13 +12,13 @@ npm install vue-time-picker --save-dev
 
 and in your component:
 
-```
+``` javascript
 import InputTag from 'vue-input-tag'
 ```
 
 ## Usage
 
-```
+``` html
 <input-tag :on-change="callback" :tags="tagsArray"></input-tag>
 ```
 
