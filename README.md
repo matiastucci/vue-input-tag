@@ -1,6 +1,6 @@
-# Vue.js Input Tag
+# vue-input-tag
 
-> A Vue.js project
+> A Vue.js 2.0 component
 
 ## Build Setup
 
@@ -17,14 +17,12 @@ npm run build
 # run unit tests
 npm run unit
 
-# run all tests
-npm test
 ```
 
 #### Props
-##### data-table
 | Name | type | default | description |
 | ---:| --- | ---| --- |
 | tags | Array | [] | Tags to be render in the input |
-| placeholder | String | "" | Placeholder to show when no tags |
+| placeholder | String | "" | Placeholder to be shown when no tags |
 | read-only | Boolean | false | Set input to readonly |
+| on-change | Function | undefined | Callback to get the tags when there is a change |
