@@ -1,6 +1,6 @@
 # vue-input-tag
 
-> A Vue.js 2.0 input tag component
+> A Vue.js 2.0 input tag component inspired in [react-tagsinput](https://github.com/olahol/react-tagsinput)
 
 
 
