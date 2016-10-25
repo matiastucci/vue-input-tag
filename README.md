@@ -23,7 +23,7 @@ import InputTag from 'vue-input-tag'
 ```
 
 ## Props
-| Name | type | default | description |
+| Name | Type | Default | Description |
 | ---:| --- | ---| --- |
 | tags | Array | [] | Tags to be render in the input |
 | placeholder | String | "" | Placeholder to be shown when no tags |
