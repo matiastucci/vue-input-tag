@@ -25,8 +25,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue',
       'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../docs/assets'),
-      'components': path.resolve(__dirname, '../docs/components')
+      'assets': path.resolve(__dirname, '../docs/assets')
     }
   },
   resolveLoader: {
