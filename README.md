@@ -1,25 +1,25 @@
 # vue-input-tag
 
-> A Vue.js 2.0 input tag component
+> A Vue.js 2.0 input tag component inspired in [react-tagsinput](https://github.com/olahol/react-tagsinput)
 
 
 
 ## Installation
 
 ``` bash
-npm install vue-time-picker --save-dev
+npm install vue-time-picker --save
 ```
 
 and in your component:
 
-```
+``` javascript
 import InputTag from 'vue-input-tag'
 ```
 
 ## Usage
 
-```
-<input-tag :on-change="callback" :tags="tagsArray"></input-tag>
+``` html
+<input-tag :on-change="callbackMethod" :tags="tagsArray"></input-tag>
 ```
 
 ## Props
