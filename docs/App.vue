@@ -39,7 +39,7 @@
     section.page-header
       h1.project-name Vue.js Input Tag
       h2.project-tagline
-      a.btn(href='#') GitHub
+      a.btn(href='https://github.com/matiastucci/vue-input-tag' target='_blank') GitHub
       a.btn(href='#') NPM
 
     section.main-content
