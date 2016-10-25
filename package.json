@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Vue.js input tag editor component",
   "author": "Matias Tucci <matiastucci@gmail.com>",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
