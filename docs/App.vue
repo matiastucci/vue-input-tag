@@ -23,9 +23,9 @@
       },
       getPreviewHTML() {
         let html = '<input-tag';
-        html += this.placeholder ? ' placeholder="placeholder"' : '';
+        html += this.placeholder ? ` placeholder="${this.placeholder}"` : '';
         html += this.tags ? ' :tags="tags"' : '';
-        html += this.readOnly ? ' :read-only="readOnly"' : '';
+        html += this.readOnly ? ' :read-only="true"' : '';
         return `${html}><input-tag>`;
       },
     },
