@@ -7,7 +7,7 @@
 ## Installation
 
 ``` bash
-npm install vue-time-picker --save-dev
+npm install vue-time-picker --save
 ```
 
 and in your component:
