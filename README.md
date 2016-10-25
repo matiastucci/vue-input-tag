@@ -19,7 +19,7 @@ import InputTag from 'vue-input-tag'
 ## Usage
 
 ``` html
-<input-tag :on-change="callback" :tags="tagsArray"></input-tag>
+<input-tag :on-change="callbackMethod" :tags="tagsArray"></input-tag>
 ```
 
 ## Props
