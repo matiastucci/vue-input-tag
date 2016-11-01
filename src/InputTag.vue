@@ -80,12 +80,16 @@
 
 <style lang="scss">
 
-  $gray-light: #A5A6AA;
-  $gray-lighter: #D2D2D5;
+  $white: #fff;
+  $grey: #ccc;
+  $grey2: #777;
+  $yellow1: #cde69c;
+  $yellow2: #a5d24a;
+  $yellow3: #638421;
 
   .vue-input-tag {
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: $white;
+    border: 1px solid $grey;
     overflow: hidden;
     padding-left: 5px;
     padding-top: 5px;
@@ -94,10 +98,10 @@
     -webkit-appearance: textfield;
 
     .tag {
-      background-color: #cde69c;
+      background-color: $yellow1;
       border-radius: 2px;
-      border: 1px solid #a5d24a;
-      color: #638421;
+      border: 1px solid $yellow2;
+      color: $yellow3;
       display: inline-block;
       font-size: 13px;
       font-weight: 400;
@@ -108,7 +112,7 @@
       .remove {
         cursor: pointer;
         font-weight: bold;
-        color: #638421;
+        color: $yellow3;
         &:hover {
           text-decoration: none;
         }
@@ -121,7 +125,7 @@
     .new-tag {
       background: transparent;
       border: 0;
-      color: #777;
+      color: $grey2;
       font-size: 13px;
       font-weight: 400;
       margin-bottom: 6px;
