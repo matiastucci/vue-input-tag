@@ -1,6 +1,6 @@
 {
   "name": "vue-input-tag",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue.js input tag editor component",
   "author": "Matias Tucci <matiastucci@gmail.com>",
   "main": "src/index.js",
