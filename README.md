@@ -7,7 +7,7 @@
 ## Installation
 
 ``` bash
-npm install vue-time-picker --save
+npm install vue-input-tag --save
 ```
 
 and in your component:
