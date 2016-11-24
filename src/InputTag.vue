@@ -63,80 +63,75 @@
   };
 </script>
 
-<template lang="pug">
-  .vue-input-tag(@click='focusNewTag()' v-bind:class='{\'read-only\': readOnly}')
-    span.tag(v-for='(tag, index) in tags')
-      span {{ tag }}
-      a.remove(v-if='!readOnly' @click.prevent.stop='remove(index)')
-    input.new-tag(
-      v-if='!readOnly'
-      v-bind:placeholder='getPlaceholder()'
-      type='text'
-      v-model='newTag'
-      v-on:keydown.delete.stop='removeLastTag()'
-      v-on:keydown.enter.prevent.stop='addNew(newTag)'
-    )
+<template>
+
+  <div @click="focusNewTag()" v-bind:class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
+    <span v-for="(tag, index) in tags" class="input-tag">
+      <span>{{ tag }}</span>
+      <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
+    </span>
+    <input v-if="!readOnly" v-bind:placeholder="getPlaceholder()" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.prevent.stop="addNew(newTag)" class="new-tag"/>
+  </div>
+
 </template>
 
-<style lang="scss">
+<style>
 
-  $white: #fff;
-  $grey: #ccc;
-  $grey2: #777;
-  $yellow1: #cde69c;
-  $yellow2: #a5d24a;
-  $yellow3: #638421;
-
-  .vue-input-tag {
-    background-color: $white;
-    border: 1px solid $grey;
+  .vue-input-tag-wrapper {
+    background-color: #fff;
+    border: 1px solid #ccc;
     overflow: hidden;
     padding-left: 5px;
     padding-top: 5px;
     cursor: text;
     height: 36px;
+    text-align: left;
     -webkit-appearance: textfield;
-
-    .tag {
-      background-color: $yellow1;
-      border-radius: 2px;
-      border: 1px solid $yellow2;
-      color: $yellow3;
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 400;
-      margin-bottom: 5px;
-      margin-right: 5px;
-      padding: 5px;
-
-      .remove {
-        cursor: pointer;
-        font-weight: bold;
-        color: $yellow3;
-        &:hover {
-          text-decoration: none;
-        }
-        &::before {
-          content: " x";
-        }
-      }
-    }
-
-    .new-tag {
-      background: transparent;
-      border: 0;
-      color: $grey2;
-      font-size: 13px;
-      font-weight: 400;
-      margin-bottom: 6px;
-      margin-top: 1px;
-      outline: none;
-      padding: 5px;
-      width: 80px;
-    }
-
-    &.read-only {
-      cursor: default;
-    }
   }
+
+  .vue-input-tag-wrapper .input-tag {
+    background-color: #cde69c;
+    border-radius: 2px;
+    border: 1px solid #a5d24a;
+    color: #638421;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+  }
+
+  .vue-input-tag-wrapper .input-tag .remove {
+    cursor: pointer;
+    font-weight: bold;
+    color: #638421;
+  }
+
+  .vue-input-tag-wrapper .input-tag .remove:hover {
+    text-decoration: none;
+  }
+
+  .vue-input-tag-wrapper .input-tag .remove::before {
+    content: " x";
+  }
+
+  .vue-input-tag-wrapper .new-tag {
+    background: transparent;
+    border: 0;
+    color: #777;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    margin-top: 1px;
+    outline: none;
+    padding: 5px;
+    padding-left: 0;
+    width: 80px;
+  }
+
+  .vue-input-tag-wrapper.read-only {
+    cursor: default;
+  }
+
 </style>

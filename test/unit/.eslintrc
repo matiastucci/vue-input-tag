@@ -4,7 +4,6 @@
   },
   "globals": {
     "expect": true,
-    "sinon": true,
-    "document": true
+    "sinon": true
   }
 }

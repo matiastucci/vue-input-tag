@@ -1,15 +1,18 @@
 {
   "name": "vue-input-tag",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Vue.js input tag editor component",
   "author": "Matias Tucci <matiastucci@gmail.com>",
-  "main": "src/index.js",
+  "main": "src/InputTag.vue",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
+  },
+  "dependencies": {
+    "vue": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -21,6 +24,7 @@
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
     "chai": "^3.5.0",
+    "chalk": "^1.1.3",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.25.0",
     "eslint": "^3.7.1",
@@ -50,22 +54,27 @@
     "karma-webpack": "^1.7.0",
     "lolex": "^1.4.0",
     "mocha": "^3.1.0",
-    "node-sass": "^3.10.1",
+    "node-sass": "^3.13.0",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
     "phantomjs-prebuilt": "^2.1.3",
     "pug": "^2.0.0-beta6",
     "sass-loader": "^4.0.2",
+    "semver": "^5.3.0",
     "shelljs": "^0.7.4",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
-    "vue": "2.0.3",
-    "vue-loader": "^9.4.0",
+    "vue-loader": "^10.0.0",
     "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.0",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
   }
 }
