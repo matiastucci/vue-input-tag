@@ -9,6 +9,9 @@
 [![bitHound Code](https://www.bithound.io/github/matiastucci/vue-input-tag/badges/code.svg)](https://www.bithound.io/github/matiastucci/vue-input-tag)
 [![Codeship](https://img.shields.io/codeship/3a192ae0-9502-0134-8f6e-1e693cf3975e/master.svg)]()
 
+<p align="center">
+  <img src="demo.gif" width="750" alt="Logo"/>
+</p>
 
 ## Installation
 
