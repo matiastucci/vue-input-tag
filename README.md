@@ -8,6 +8,7 @@
 [![bitHound Dependencies](https://www.bithound.io/github/matiastucci/vue-input-tag/badges/dependencies.svg)](https://www.bithound.io/github/matiastucci/vue-input-tag/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/matiastucci/vue-input-tag/badges/code.svg)](https://www.bithound.io/github/matiastucci/vue-input-tag)
 [![Codeship](https://img.shields.io/codeship/3a192ae0-9502-0134-8f6e-1e693cf3975e/master.svg)]()
+[![Coverage Status](https://coveralls.io/repos/github/matiastucci/vue-input-tag/badge.svg?branch=master)](https://coveralls.io/github/matiastucci/vue-input-tag?branch=master)
 
 <p align="center">
   <img src="demo.gif" width="750" alt="Logo"/>
