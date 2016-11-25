@@ -40,7 +40,7 @@
       h1.project-name Vue.js Input Tag
       h2.project-tagline
       a.btn(href='https://github.com/matiastucci/vue-input-tag' target='_blank') GitHub
-      a.btn(href='#') NPM
+      a.btn(href='https://www.npmjs.com/package/vue-input-tag' target='_blank') NPM
 
     section.main-content
 
