@@ -84,7 +84,6 @@
     padding-left: 5px;
     padding-top: 5px;
     cursor: text;
-    height: 36px;
     text-align: left;
     -webkit-appearance: textfield;
   }
