@@ -81,8 +81,8 @@
     background-color: #fff;
     border: 1px solid #ccc;
     overflow: hidden;
-    padding-left: 5px;
-    padding-top: 5px;
+    padding-left: 4px;
+    padding-top: 4px;
     cursor: text;
     text-align: left;
     -webkit-appearance: textfield;
@@ -96,9 +96,9 @@
     display: inline-block;
     font-size: 13px;
     font-weight: 400;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    padding: 5px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    padding: 3px;
   }
 
   .vue-input-tag-wrapper .input-tag .remove {
@@ -124,7 +124,7 @@
     margin-bottom: 6px;
     margin-top: 1px;
     outline: none;
-    padding: 5px;
+    padding: 4px;
     padding-left: 0;
     width: 80px;
   }
