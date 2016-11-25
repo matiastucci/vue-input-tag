@@ -5,7 +5,7 @@
 [![bitHound Dependencies](https://www.bithound.io/github/matiastucci/vue-input-tag/badges/dependencies.svg)](https://www.bithound.io/github/matiastucci/vue-input-tag/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/matiastucci/vue-input-tag/badges/devDependencies.svg)](https://www.bithound.io/github/matiastucci/vue-input-tag/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/matiastucci/vue-input-tag/badges/code.svg)](https://www.bithound.io/github/matiastucci/vue-input-tag)
-[![Codeship](https://codeship.com/projects/3a192ae0-9502-0134-8f6e-1e693cf3975e/status?branch=master)](https://www.bithound.io/github/matiastucci/vue-input-tag)
+[![Codeship](https://codeship.com/projects/3a192ae0-9502-0134-8f6e-1e693cf3975e/status?branch=master)]()
 
 
 
