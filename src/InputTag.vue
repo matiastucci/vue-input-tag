@@ -44,8 +44,8 @@
       },
       removeLastTag() {
         if (this.newTag) { return; }
-        this.tagChange();
         this.tags.pop();
+        this.tagChange();
       },
       getPlaceholder() {
         if (!this.tags.length) {
