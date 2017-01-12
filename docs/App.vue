@@ -26,7 +26,8 @@
         html += this.placeholder ? ` placeholder="${this.placeholder}"` : '';
         html += this.tags ? ' :tags="tags"' : '';
         html += this.readOnly ? ' :read-only="true"' : '';
-        return `${html}><input-tag>`;
+        html += ' :validate="text"';
+        return `${html}></input-tag>`;
       },
     },
   };
@@ -79,7 +80,8 @@
           :on-change='newTag',
           :tags='tags',
           :placeholder='placeholder',
-          :read-only='readOnly'
+          :read-only='readOnly',
+          :validate='\'text\''
         )
 
         code {{ getPreviewHTML() }}
