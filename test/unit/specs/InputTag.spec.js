@@ -105,4 +105,99 @@ describe('InputTag.vue', () => {
       expect(InputTagComponentWithPlaceholder.$el.querySelector('input.new-tag').placeholder).to.equal('Add Tag');
     });
   });
+
+  describe('validate="text"', () => {
+    const vmValidation = new Vue({
+      el: document.createElement('div'),
+      components: { InputTag },
+      template: '<input-tag validate="text"><input-tag/>',
+    });
+
+    const InputTagTextOnly = vmValidation.$children[0];
+
+    it('should only add text values', () => {
+      InputTagTextOnly.addNew('foo');
+      InputTagTextOnly.addNew('123');
+      InputTagTextOnly.addNew('mati@tucci.me');
+      InputTagTextOnly.addNew('https://tucci.me');
+      InputTagTextOnly.addNew('2002-04-03');
+      expect(InputTagTextOnly.tags).to.have.length(1);
+    });
+  });
+
+  describe('validate="digits"', () => {
+    const vmValidation = new Vue({
+      el: document.createElement('div'),
+      components: { InputTag },
+      template: '<input-tag validate="digits"><input-tag/>',
+    });
+
+    const InputTagDigitsOnly = vmValidation.$children[0];
+
+    it('should only add text values', () => {
+      InputTagDigitsOnly.addNew('foo');
+      InputTagDigitsOnly.addNew('123');
+      InputTagDigitsOnly.addNew('mati@tucci.me');
+      InputTagDigitsOnly.addNew('https://tucci.me');
+      InputTagDigitsOnly.addNew('2002-04-03');
+      expect(InputTagDigitsOnly.tags).to.have.length(1);
+    });
+  });
+
+  describe('validate="email"', () => {
+    const vmValidation = new Vue({
+      el: document.createElement('div'),
+      components: { InputTag },
+      template: '<input-tag validate="email"><input-tag/>',
+    });
+
+    const InputTagEmailOnly = vmValidation.$children[0];
+
+    it('should only add text values', () => {
+      InputTagEmailOnly.addNew('foo');
+      InputTagEmailOnly.addNew('123');
+      InputTagEmailOnly.addNew('mati@tucci.me');
+      InputTagEmailOnly.addNew('https://tucci.me');
+      InputTagEmailOnly.addNew('2002-04-03');
+      expect(InputTagEmailOnly.tags).to.have.length(1);
+    });
+  });
+
+  describe('validate="url"', () => {
+    const vmValidation = new Vue({
+      el: document.createElement('div'),
+      components: { InputTag },
+      template: '<input-tag validate="url"><input-tag/>',
+    });
+
+    const InputTagUrlOnly = vmValidation.$children[0];
+
+    it('should only add text values', () => {
+      InputTagUrlOnly.addNew('foo');
+      InputTagUrlOnly.addNew('123');
+      InputTagUrlOnly.addNew('mati@tucci.me');
+      InputTagUrlOnly.addNew('https://tucci.me');
+      InputTagUrlOnly.addNew('2002-04-03');
+      expect(InputTagUrlOnly.tags).to.have.length(1);
+    });
+  });
+
+  describe('validate="isodate"', () => {
+    const vmValidation = new Vue({
+      el: document.createElement('div'),
+      components: { InputTag },
+      template: '<input-tag validate="isodate"><input-tag/>',
+    });
+
+    const InputTagISODateOnly = vmValidation.$children[0];
+
+    it('should only add text values', () => {
+      InputTagISODateOnly.addNew('foo');
+      InputTagISODateOnly.addNew('123');
+      InputTagISODateOnly.addNew('mati@tucci.me');
+      InputTagISODateOnly.addNew('https://tucci.me');
+      InputTagISODateOnly.addNew('2002-04-03');
+      expect(InputTagISODateOnly.tags).to.have.length(1);
+    });
+  });
 });
