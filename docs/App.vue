@@ -14,6 +14,7 @@
         placeholder: 'Add Tag',
         tags: ['Jerry', 'Kramer', 'Elaine', 'George'],
         htmlCode: '',
+        validate: '',
       };
     },
 
@@ -26,7 +27,8 @@
         html += this.placeholder ? ` placeholder="${this.placeholder}"` : '';
         html += this.tags ? ' :tags="tags"' : '';
         html += this.readOnly ? ' :read-only="true"' : '';
-        return `${html}><input-tag>`;
+        html += this.validate ? ` validate="${this.validate}"` : '';
+        return `${html}></input-tag>`;
       },
     },
   };
@@ -72,6 +74,16 @@
           input(v-model='readOnly' type='checkbox')
 
         .form-group
+          p.label validate:
+          select(v-model='validate')
+            option(value='') No validate
+            option(value='text') Text
+            option(value='email') Email
+            option(value='url') Url
+            option(value='digits') Digits
+            option(value='isodate') ISO Date
+
+        .form-group
           p.label tags:
           code {{ tags }}
 
@@ -79,7 +91,8 @@
           :on-change='newTag',
           :tags='tags',
           :placeholder='placeholder',
-          :read-only='readOnly'
+          :read-only='readOnly',
+          :validate='validate'
         )
 
         code {{ getPreviewHTML() }}
