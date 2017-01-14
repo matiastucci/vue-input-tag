@@ -134,12 +134,11 @@ describe('InputTag.vue', () => {
 
     const InputTagDigitsOnly = vmValidation.$children[0];
 
-    it('should only add text values', () => {
+    it('should only add digits values', () => {
       InputTagDigitsOnly.addNew('foo');
       InputTagDigitsOnly.addNew('123');
       InputTagDigitsOnly.addNew('mati@tucci.me');
       InputTagDigitsOnly.addNew('https://tucci.me');
-      InputTagDigitsOnly.addNew('2002-04-03');
       expect(InputTagDigitsOnly.tags).to.have.length(1);
     });
   });
