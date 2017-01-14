@@ -81,7 +81,7 @@
             option(value='email') Email
             option(value='url') Url
             option(value='digits') Digits
-            option(value='isodate') Date
+            option(value='isodate') ISO Date
 
         .form-group
           p.label tags:
