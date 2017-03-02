@@ -66,12 +66,6 @@
         this.tags.pop();
         this.tagChange();
       },
-      getPlaceholder() {
-        if (!this.tags.length) {
-          return this.placeholder;
-        }
-        return '';
-      },
       tagChange() {
         if (this.onChange) {
           // avoid passing the observer
@@ -89,7 +83,7 @@
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
-    <input v-if="!readOnly" v-bind:placeholder="getPlaceholder()" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.prevent.stop="addNew(newTag)" class="new-tag"/>
+    <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.prevent.stop="addNew(newTag)" class="new-tag"/>
   </div>
 
 </template>
