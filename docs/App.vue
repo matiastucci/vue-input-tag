@@ -106,7 +106,7 @@
   @import 'style/github-light';
   @import 'style/normalize';
   @import 'style/stylesheet';
-  =
+
   .form-group {
     p.label {
       display: inline-block;
