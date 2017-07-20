@@ -17,7 +17,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build:docs": "cross-env NODE_ENV=docs webpack --progress --hide-modules",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "prepublish": "npm run build",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "vue": "^2.1.8"
@@ -62,5 +64,11 @@
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 4.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
+    }
   }
 }

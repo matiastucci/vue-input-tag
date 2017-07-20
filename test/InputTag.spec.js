@@ -1,26 +1,32 @@
+/* globals describe it beforeEach expect */
+
 import Vue from 'vue'
-import InputTag from 'src/InputTag'
+import jsdom from 'jsdom'
+import InputTag from '../src/InputTag.vue'
+
+const renderer = require('vue-server-renderer').createRenderer()
 
 describe('InputTag.vue', () => {
-  const vm = new Vue({
-    el: document.createElement('div'),
-    components: { InputTag },
-    template: '<input-tag><input-tag/>'
-  })
-
-  const InputTagComponent = vm.$children[0]
+  const ClonedComponent = Vue.extend(InputTag)
+  let InputTagComponent
 
   beforeEach((cb) => {
-    InputTagComponent.tags.length = 0
+    InputTagComponent = new ClonedComponent({
+      data () { return { tags: [] } }
+    }).$mount()
     cb()
   })
 
-  it('should have a new tag input', () => {
-    expect(InputTagComponent.$el.querySelector('input.new-tag')).not.to.equal(null)
-  })
+  it('should have a new tag input without placeholder', () => {
+    renderer.renderToString(InputTagComponent, (err, str) => {
+      if (err) { throw err }
 
-  it('shouldn\'t have a placeholder', () => {
-    expect(InputTagComponent.$el.querySelector('input.new-tag').placeholder).to.equal('')
+      const dom = new jsdom.JSDOM(str)
+      const input = dom.window.document.querySelector('input.new-tag')
+
+      expect.anything(input)
+      expect(input.placeholder).toEqual('')
+    })
   })
 
   describe('addNew()', () => {
@@ -28,7 +34,8 @@ describe('InputTag.vue', () => {
       InputTagComponent.addNew('foo bar')
       InputTagComponent.addNew('foo')
       InputTagComponent.addNew('bar')
-      expect(InputTagComponent.tags).to.have.length(3)
+
+      expect(InputTagComponent.tags.length).toEqual(3)
     })
   })
 
@@ -38,7 +45,8 @@ describe('InputTag.vue', () => {
       InputTagComponent.addNew('foo')
       InputTagComponent.addNew('bar')
       InputTagComponent.remove(0)
-      expect(InputTagComponent.tags).to.have.length(2)
+
+      expect(InputTagComponent.tags.length).toEqual(2)
     })
   })
 
@@ -48,72 +56,84 @@ describe('InputTag.vue', () => {
       InputTagComponent.addNew('foo')
       InputTagComponent.addNew('bar')
       InputTagComponent.removeLastTag()
-      expect(InputTagComponent.tags).to.have.length(2)
+
+      expect(InputTagComponent.tags.length).toEqual(2)
     })
   })
 
   describe('read-only="true"', () => {
-    const vmReadOnly = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag :read-only="true"><input-tag/>'
-    })
+    const InputTagComponentReadOnly = new ClonedComponent({
+      data () { return { tags: [] } },
+      propsData: { readOnly: true }
+    }).$mount()
 
-    const InputTagComponentReadOnly = vmReadOnly.$children[0]
+    it('should have a read-only CSS class and shouldn\'t have a remove tag button', () => {
+      renderer.renderToString(InputTagComponentReadOnly, (err, str) => {
+        if (err) { throw err }
 
-    it('should have a read-only CSS class', () => {
-      expect(InputTagComponentReadOnly.$el.className).to.contain('read-only')
+        const dom = new jsdom.JSDOM(str)
+        const input = dom.window.document.querySelector('.read-only')
+
+        expect.anything(input)
+        expect(input.querySelector('a.remove')).toEqual(null)
+      })
     })
 
     it('shouldn\'t have a new tag input', () => {
-      expect(InputTagComponentReadOnly.$el.querySelector('input.new-tag')).to.equal(null)
-    })
+      renderer.renderToString(InputTagComponentReadOnly, (err, str) => {
+        if (err) { throw err }
 
-    it('shouldn\'t have a remove tag button', () => {
-      expect(InputTagComponentReadOnly.$el.querySelector('a.remove')).to.equal(null)
+        const dom = new jsdom.JSDOM(str)
+        const input = dom.window.document.querySelector('input.new-tag')
+
+        expect(input).toEqual(null)
+      })
     })
   })
 
   describe('tags="[1,2,3]"', () => {
-    const vmWithTags = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag :tags="[\'Jerry\', \'Kramer\', \'Elaine\']"><input-tag/>'
-    })
-
-    const InputTagComponentWithTags = vmWithTags.$children[0]
+    const InputTagComponentWithTags = new ClonedComponent({
+      data () { return { tags: ['Jerry', 'Kramer', 'Elaine'] } }
+    }).$mount()
 
     it('should load the tags', () => {
-      expect(InputTagComponentWithTags.tags).to.have.length(3)
+      expect(InputTagComponentWithTags.tags.length).toEqual(3)
     })
 
     it('should have remove buttons', () => {
-      expect(InputTagComponentWithTags.$el.querySelectorAll('a.remove')).to.have.length(3)
+      renderer.renderToString(InputTagComponentWithTags, (err, str) => {
+        if (err) { throw err }
+
+        const dom = new jsdom.JSDOM(str)
+        const removeButtons = dom.window.document.querySelectorAll('a.remove')
+
+        expect(removeButtons.length).toEqual(3)
+      })
     })
   })
 
   describe('placeholder="Add Tag"', () => {
-    const vmWithPlaceholder = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag placeholder="Add Tag"><input-tag/>'
-    })
-
-    const InputTagComponentWithPlaceholder = vmWithPlaceholder.$children[0]
+    const placeholder = 'Add Tag'
+    const InputTagComponentWithPlaceholder = new ClonedComponent({
+      data () { return { placeholder } }
+    }).$mount()
 
     it('should have a placeholder', () => {
-      expect(InputTagComponentWithPlaceholder.$el.querySelector('input.new-tag').placeholder).to.equal('Add Tag')
+      renderer.renderToString(InputTagComponentWithPlaceholder, (err, str) => {
+        if (err) { throw err }
+
+        const dom = new jsdom.JSDOM(str)
+        const input = dom.window.document.querySelector('input.new-tag')
+
+        expect(input.placeholder).toEqual(placeholder)
+      })
     })
   })
 
   describe('validate="text"', () => {
-    const vmValidation = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag validate="text"><input-tag/>'
-    })
-
-    const InputTagTextOnly = vmValidation.$children[0]
+    const InputTagTextOnly = new ClonedComponent({
+      propsData: { validate: 'text' }
+    }).$mount()
 
     it('should only add text values', () => {
       InputTagTextOnly.addNew('foo')
@@ -121,36 +141,30 @@ describe('InputTag.vue', () => {
       InputTagTextOnly.addNew('mati@tucci.me')
       InputTagTextOnly.addNew('https://tucci.me')
       InputTagTextOnly.addNew('2002-04-03')
-      expect(InputTagTextOnly.tags).to.have.length(1)
+
+      expect(InputTagTextOnly.tags.length).toEqual(1)
     })
   })
 
   describe('validate="digits"', () => {
-    const vmValidation = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag validate="digits"><input-tag/>'
-    })
-
-    const InputTagDigitsOnly = vmValidation.$children[0]
+    const InputTagDigitsOnly = new ClonedComponent({
+      propsData: { validate: 'digits' }
+    }).$mount()
 
     it('should only add digits values', () => {
       InputTagDigitsOnly.addNew('foo')
       InputTagDigitsOnly.addNew('123')
       InputTagDigitsOnly.addNew('mati@tucci.me')
       InputTagDigitsOnly.addNew('https://tucci.me')
-      expect(InputTagDigitsOnly.tags).to.have.length(1)
+
+      expect(InputTagDigitsOnly.tags.length).toEqual(1)
     })
   })
 
   describe('validate="email"', () => {
-    const vmValidation = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag validate="email"><input-tag/>'
-    })
-
-    const InputTagEmailOnly = vmValidation.$children[0]
+    const InputTagEmailOnly = new ClonedComponent({
+      propsData: { validate: 'email' }
+    }).$mount()
 
     it('should only add text values', () => {
       InputTagEmailOnly.addNew('foo')
@@ -158,18 +172,15 @@ describe('InputTag.vue', () => {
       InputTagEmailOnly.addNew('mati@tucci.me')
       InputTagEmailOnly.addNew('https://tucci.me')
       InputTagEmailOnly.addNew('2002-04-03')
-      expect(InputTagEmailOnly.tags).to.have.length(1)
+
+      expect(InputTagEmailOnly.tags.length).toEqual(1)
     })
   })
 
   describe('validate="url"', () => {
-    const vmValidation = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag validate="url"><input-tag/>'
-    })
-
-    const InputTagUrlOnly = vmValidation.$children[0]
+    const InputTagUrlOnly = new ClonedComponent({
+      propsData: { validate: 'url' }
+    }).$mount()
 
     it('should only add text values', () => {
       InputTagUrlOnly.addNew('foo')
@@ -177,18 +188,15 @@ describe('InputTag.vue', () => {
       InputTagUrlOnly.addNew('mati@tucci.me')
       InputTagUrlOnly.addNew('https://tucci.me')
       InputTagUrlOnly.addNew('2002-04-03')
-      expect(InputTagUrlOnly.tags).to.have.length(1)
+
+      expect(InputTagUrlOnly.tags.length).toEqual(1)
     })
   })
 
   describe('validate="isodate"', () => {
-    const vmValidation = new Vue({
-      el: document.createElement('div'),
-      components: { InputTag },
-      template: '<input-tag validate="isodate"><input-tag/>'
-    })
-
-    const InputTagISODateOnly = vmValidation.$children[0]
+    const InputTagISODateOnly = new ClonedComponent({
+      propsData: { validate: 'isodate' }
+    }).$mount()
 
     it('should only add text values', () => {
       InputTagISODateOnly.addNew('foo')
@@ -196,7 +204,8 @@ describe('InputTag.vue', () => {
       InputTagISODateOnly.addNew('mati@tucci.me')
       InputTagISODateOnly.addNew('https://tucci.me')
       InputTagISODateOnly.addNew('2002-04-03')
-      expect(InputTagISODateOnly.tags).to.have.length(1)
+
+      expect(InputTagISODateOnly.tags.length).toEqual(1)
     })
   })
 })
