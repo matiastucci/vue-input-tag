@@ -8,7 +8,7 @@
     "inputtag"
   ],
   "author": "Matias Tucci <matiastucci@gmail.com>",
-  "main": "src/InputTag.vue",
+  "main": "dist/vue-input-tag.min.js",
   "repository": "https://github.com/matiastucci/vue-input-tag",
   "homepage": "https://matiastucci.github.io/vue-input-tag",
   "license": "MIT",
@@ -56,7 +56,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 6.0.0",
+    "npm": ">= 4.0.0"
   }
 }
