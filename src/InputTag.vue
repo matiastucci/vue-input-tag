@@ -87,7 +87,7 @@
 <template>
 
   <div @click="focusNewTag()" v-bind:class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
-    <span v-for="(tag, index) in tags" class="input-tag">
+    <span v-for="(tag, index) in tags" v-bind:key="index" class="input-tag">
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
