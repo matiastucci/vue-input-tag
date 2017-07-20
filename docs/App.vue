@@ -1,27 +1,27 @@
 <script>
-  import InputTag from '@/InputTag'
+  import InputTag from '@/InputTag.vue'
 
   export default {
     name: 'app',
 
     components: { InputTag },
 
-    data() {
+    data () {
       return {
         readOnly: false,
         placeholder: 'Add Tag',
         tags: ['Jerry', 'Kramer', 'Elaine', 'George'],
         htmlCode: '',
         validate: ''
-      };
+      }
     },
 
     methods: {
-      newTag(tags) {
+      newTag (tags) {
         console.log({ tags })
       },
 
-      getPreviewHTML() {
+      getPreviewHTML () {
         let html = '<input-tag'
         html += this.placeholder ? ` placeholder="${this.placeholder}"` : ''
         html += this.tags ? ' :tags="tags"' : ''
@@ -34,7 +34,6 @@
 </script>
 
 <template lang="pug">
-
   #app
 
     section.page-header
