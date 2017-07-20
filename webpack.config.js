@@ -67,25 +67,9 @@ if (process.env.NODE_ENV === 'production') {
     filename: 'vue-input-tag.min.js',
     libraryTarget: 'umd'
   }
+}
 
-  module.exports.devtool = '#source-map'
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
-} else if (process.env.NODE_ENV === 'docs') {
+if (process.env.NODE_ENV === 'docs' || process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
