@@ -1,41 +1,39 @@
 <script>
-  import InputTag from 'src/InputTag';
+  import InputTag from '@/InputTag.vue'
 
   export default {
     name: 'app',
 
-    components: {
-      InputTag,
-    },
+    components: { InputTag },
 
-    data() {
+    data () {
       return {
         readOnly: false,
         placeholder: 'Add Tag',
         tags: ['Jerry', 'Kramer', 'Elaine', 'George'],
         htmlCode: '',
-        validate: '',
-      };
+        validate: ''
+      }
     },
 
     methods: {
-      newTag(tags) {
-        console.log({ tags });
+      newTag (tags) {
+        console.log({ tags })
       },
-      getPreviewHTML() {
-        let html = '<input-tag';
-        html += this.placeholder ? ` placeholder="${this.placeholder}"` : '';
-        html += this.tags ? ' :tags="tags"' : '';
-        html += this.readOnly ? ' :read-only="true"' : '';
-        html += this.validate ? ` validate="${this.validate}"` : '';
-        return `${html}></input-tag>`;
-      },
-    },
-  };
+
+      getPreviewHTML () {
+        let html = '<input-tag'
+        html += this.placeholder ? ` placeholder="${this.placeholder}"` : ''
+        html += this.tags ? ' :tags="tags"' : ''
+        html += this.readOnly ? ' :read-only="true"' : ''
+        html += this.validate ? ` validate="${this.validate}"` : ''
+        return `${html}></input-tag>`
+      }
+    }
+  }
 </script>
 
 <template lang="pug">
-
   #app
 
     section.page-header
@@ -108,6 +106,7 @@
   @import 'style/github-light';
   @import 'style/normalize';
   @import 'style/stylesheet';
+
   .form-group {
     p.label {
       display: inline-block;
