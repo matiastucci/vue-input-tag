@@ -9,10 +9,7 @@
   ],
   "author": "Matias Tucci <matiastucci@gmail.com>",
   "main": "src/InputTag.vue",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/matiastucci/vue-input-tag"
-  },
+  "repository": "https://github.com/matiastucci/vue-input-tag",
   "homepage": "https://matiastucci.github.io/vue-input-tag",
   "license": "MIT",
   "scripts": {
@@ -32,6 +29,7 @@
     "babel-loader": "^6.1.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
+    "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "eslint": "^4.2.0",
     "eslint-config-standard": "^10.2.1",
