@@ -47,7 +47,7 @@
       },
 
       addNew (tag) {
-        if (tag && !this.tags.includes(tag) && this.validateIfNeeded(tag)) {
+        if (tag && this.tags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
           this.tags.push(tag)
           this.tagChange()
         }
