@@ -36,7 +36,14 @@
 
     data () {
       return {
-        newTag: ''
+        newTag: '',
+        innerTags: this.tags
+      }
+    },
+
+    watch: {
+      tags () {
+        this.innerTags = this.tags
       }
     },
 
@@ -47,8 +54,8 @@
       },
 
       addNew (tag) {
-        if (tag && this.tags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
-          this.tags.push(tag)
+        if (tag && this.innerTags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
+          this.innerTags.push(tag)
           this.tagChange()
         }
         this.newTag = ''
@@ -64,20 +71,20 @@
       },
 
       remove (index) {
-        this.tags.splice(index, 1)
+        this.innerTags.splice(index, 1)
         this.tagChange()
       },
 
       removeLastTag () {
         if (this.newTag) { return }
-        this.tags.pop()
+        this.innerTags.pop()
         this.tagChange()
       },
 
       tagChange () {
         if (this.onChange) {
           // avoid passing the observer
-          this.onChange(JSON.parse(JSON.stringify(this.tags)))
+          this.onChange(JSON.parse(JSON.stringify(this.innerTags)))
         }
       }
     }
@@ -87,7 +94,7 @@
 <template>
 
   <div @click="focusNewTag()" v-bind:class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
-    <span v-for="(tag, index) in tags" v-bind:key="index" class="input-tag">
+    <span v-for="(tag, index) in innerTags" v-bind:key="index" class="input-tag">
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
