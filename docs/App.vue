@@ -87,7 +87,7 @@
 
         input-tag(
           :on-change='newTag',
-          :tags='tags',
+          :tags.sync='tags',
           :placeholder='placeholder',
           :read-only='readOnly',
           :validate='validate'
