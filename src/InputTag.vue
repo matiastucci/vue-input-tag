@@ -37,13 +37,13 @@
     data () {
       return {
         newTag: '',
-        innerTags: this.tags
+        innerTags: [...this.tags]
       }
     },
 
     watch: {
       tags () {
-        this.innerTags = this.tags
+        this.innerTags = [...this.tags]
       }
     },
 
@@ -86,6 +86,8 @@
           // avoid passing the observer
           this.onChange(JSON.parse(JSON.stringify(this.innerTags)))
         }
+
+        this.$emit('update:tags', this.innerTags)
       }
     }
   }
