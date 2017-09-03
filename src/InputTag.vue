@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       newTag: '',
       innerTags: [...this.tags]
@@ -42,18 +42,18 @@ export default {
   },
 
   watch: {
-    tags() {
+    tags () {
       this.innerTags = [...this.tags]
     }
   },
 
   methods: {
-    focusNewTag() {
+    focusNewTag () {
       if (this.readOnly) { return }
       this.$el.querySelector('.new-tag').focus()
     },
 
-    addNew(tag) {
+    addNew (tag) {
       if (tag && this.innerTags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
         this.innerTags.push(tag)
         this.tagChange()
@@ -61,7 +61,7 @@ export default {
       this.newTag = ''
     },
 
-    validateIfNeeded(tagValue) {
+    validateIfNeeded (tagValue) {
       if (this.validate === '' || this.validate === undefined) {
         return true
       } else if (Object.keys(validators).indexOf(this.validate) > -1) {
@@ -70,18 +70,18 @@ export default {
       return true
     },
 
-    remove(index) {
+    remove (index) {
       this.innerTags.splice(index, 1)
       this.tagChange()
     },
 
-    removeLastTag() {
+    removeLastTag () {
       if (this.newTag) { return }
       this.innerTags.pop()
       this.tagChange()
     },
 
-    tagChange() {
+    tagChange () {
       if (this.onChange) {
         // avoid passing the observer
         this.onChange(JSON.parse(JSON.stringify(this.innerTags)))
