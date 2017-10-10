@@ -34,6 +34,10 @@
         type: Boolean,
         default: false
       },
+      allowDelete: {
+        type: Boolean,
+        default: false
+      },
       validate: {
         type: String,
         default: ''
@@ -107,7 +111,7 @@
   <div @click="focusNewTag()" v-bind:class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
     <span v-for="(tag, index) in tags" v-bind:key="index" class="input-tag">
       <span>{{ tag }}</span>
-      <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
+      <a v-if="!readOnly || allowDelete" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
     <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.188.tab.prevent.stop="addNew(newTag)" class="new-tag"/>
   </div>
