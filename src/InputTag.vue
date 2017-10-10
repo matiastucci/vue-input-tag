@@ -1,5 +1,5 @@
 <script>
-  /*eslint-disable*/
+  /* eslint-disable */
   const validators = {
     email: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
     url : new RegExp(/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i),
@@ -7,7 +7,7 @@
     digits : new RegExp(/^[\d() \.\:\-\+#]+$/),
     isodate : new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
   }
-  /*eslint-enable*/
+  /* eslint-enable */
 
   export default {
     name: 'InputTag',
@@ -22,6 +22,12 @@
         default: ''
       },
       onChange: {
+        type: Function
+      },
+      onDelete: {
+        type: Function
+      },
+      onAdd: {
         type: Function
       },
       readOnly: {
@@ -48,8 +54,11 @@
 
       addNew (tag) {
         if (tag && this.tags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
+          const arr = JSON.parse(JSON.stringify(this.tags))
+          const index = this.tags.length
           this.tags.push(tag)
           this.tagChange()
+          this.tagAdd(tag, index, arr)
         }
         this.newTag = ''
       },
@@ -64,14 +73,23 @@
       },
 
       remove (index) {
-        this.tags.splice(index, 1)
+        const value = this.tags.splice(index, 1)[0]
+        const arr = JSON.parse(JSON.stringify(this.tags))
         this.tagChange()
+        this.tagDelete(value, index, arr)
       },
 
       removeLastTag () {
         if (this.newTag) { return }
-        this.tags.pop()
-        this.tagChange()
+        this.remove(this.tags.length - 1)
+      },
+
+      tagAdd (value, index, arr) {
+        if (this.onAdd) this.onAdd(value, index, arr)
+      },
+
+      tagDelete (value, index, arr) {
+        if (this.onDelete) this.onDelete(value, index, arr)
       },
 
       tagChange () {
