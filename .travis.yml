@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "8"
+  - "7"
+  - "6"
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - yarn global add greenkeeper-lockfile@1
+
+install: yarn
+
+before_script: greenkeeper-lockfile-update
+
+script: yarn test
+
+after_script: greenkeeper-lockfile-upload
