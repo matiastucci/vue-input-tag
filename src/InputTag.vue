@@ -31,6 +31,16 @@
       validate: {
         type: String,
         default: ''
+      },
+      addTagOnKeys: {
+        type: Array,
+        default: function() {
+          return [
+            13, // Return
+            188, // Comma ','
+            9, // Tab
+          ];
+        },
       }
     },
 
@@ -46,9 +56,22 @@
         this.$el.querySelector('.new-tag').focus()
       },
 
-      addNew (tag) {
-        if (tag && this.tags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
-          this.tags.push(tag)
+      addNew (e) {
+        // Do nothing if the current key code is 
+        // not within those defined within the addTagOnKeys prop array.
+        if (-1 === this.addTagOnKeys.indexOf(e.keyCode)) {
+          return;
+        } 
+
+        // We prevent default & stop propagation for all 
+        // keys except tabs (used to move between controls)
+        else if (e.keyCode !== 9) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+
+        if (this.newTag && this.tags.indexOf(this.newTag) === -1 && this.validateIfNeeded(this.newTag)) {
+          this.tags.push(this.newTag)
           this.tagChange()
         }
         this.newTag = ''
@@ -91,7 +114,7 @@
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
-    <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.188.tab.prevent.stop="addNew(newTag)" class="new-tag"/>
+    <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown="addNew" class="new-tag"/>
   </div>
 
 </template>
