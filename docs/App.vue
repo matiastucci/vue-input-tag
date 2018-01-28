@@ -17,14 +17,10 @@
     },
 
     methods: {
-      newTag (tags) {
-        console.log({ tags })
-      },
-
       getPreviewHTML () {
         let html = '<input-tag'
         html += this.placeholder ? ` placeholder="${this.placeholder}"` : ''
-        html += this.tags ? ' :tags="tags"' : ''
+        html += this.tags ? ' :tags.sync="tags"' : ''
         html += this.readOnly ? ' :read-only="true"' : ''
         html += this.validate ? ` validate="${this.validate}"` : ''
         return `${html}></input-tag>`
@@ -86,7 +82,6 @@
           code {{ tags }}
 
         input-tag(
-          :on-change='newTag',
           :tags.sync='tags',
           :placeholder='placeholder',
           :read-only='readOnly',

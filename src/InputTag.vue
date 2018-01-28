@@ -21,9 +21,6 @@ export default {
       type: String,
       default: ''
     },
-    onChange: {
-      type: Function
-    },
     readOnly: {
       type: Boolean,
       default: false
@@ -82,11 +79,6 @@ export default {
     },
 
     tagChange () {
-      if (this.onChange) {
-        // avoid passing the observer
-        this.onChange(JSON.parse(JSON.stringify(this.innerTags)))
-      }
-
       this.$emit('update:tags', this.innerTags)
     }
   }
