@@ -28,6 +28,9 @@ export default {
     validate: {
       type: String,
       default: ''
+    },
+    limit: {
+      default: -1
     }
   },
 
@@ -44,13 +47,20 @@ export default {
     }
   },
 
+  computed: {
+    isLimit: function () {
+      return this.limit > 0 && Number(this.limit) === this.innerTags.length
+    }
+  },
+
   methods: {
     focusNewTag () {
-      if (this.readOnly) { return }
+      if (this.readOnly || !this.$el.querySelector('.new-tag')) { return }
       this.$el.querySelector('.new-tag').focus()
     },
 
     addNew (tag) {
+      if (this.isLimit) return
       if (tag && this.innerTags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
         this.innerTags.push(tag)
         this.tagChange()
@@ -91,7 +101,16 @@ export default {
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
-    <input v-if="!readOnly" :placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.188.prevent.stop="addNew(newTag)" class="new-tag" />
+    <input
+      v-if                                = "!readOnly && !isLimit"
+      ref                                 = "inputtag"
+      :placeholder                        = "placeholder"
+      type                                = "text"
+      v-model                             = "newTag"
+      v-on:keydown.delete.stop            = "removeLastTag()"
+      v-on:keydown.enter.188.prevent.stop = "addNew(newTag)"
+      class                               = "new-tag"
+    />
   </div>
 </template>
 
