@@ -109,6 +109,7 @@ export default {
       v-model                             = "newTag"
       v-on:keydown.delete.stop            = "removeLastTag()"
       v-on:keydown.enter.188.prevent.stop = "addNew(newTag)"
+      v-on:blur                           = "addNew(newTag)"
       class                               = "new-tag"
     />
   </div>
