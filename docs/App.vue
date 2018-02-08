@@ -11,21 +11,19 @@
         readOnly: false,
         placeholder: 'Add Tag',
         tags: ['Jerry', 'Kramer', 'Elaine', 'George'],
+        limit: 10,
         htmlCode: '',
         validate: ''
       }
     },
 
     methods: {
-      newTag (tags) {
-        console.log({ tags })
-      },
-
       getPreviewHTML () {
         let html = '<input-tag'
         html += this.placeholder ? ` placeholder="${this.placeholder}"` : ''
-        html += this.tags ? ' :tags="tags"' : ''
+        html += this.tags ? ' :tags.sync="tags"' : ''
         html += this.readOnly ? ' :read-only="true"' : ''
+        html += this.limit ? ' :limit="limit"' : ''
         html += this.validate ? ` validate="${this.validate}"` : ''
         return `${html}></input-tag>`
       }
@@ -72,6 +70,10 @@
           input(v-model='readOnly' type='checkbox')
 
         .form-group
+          p.label limit:
+          input(v-model='limit' type='number')
+
+        .form-group
           p.label validate:
           select(v-model='validate')
             option(value='') No validate
@@ -86,8 +88,8 @@
           code {{ tags }}
 
         input-tag(
-          :on-change='newTag',
-          :tags='tags',
+          :limit='limit'
+          :tags.sync='tags',
           :placeholder='placeholder',
           :read-only='readOnly',
           :validate='validate'
