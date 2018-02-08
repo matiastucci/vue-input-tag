@@ -41,6 +41,7 @@ import InputTag from 'vue-input-tag'
 | limit | String or Number | -1 (none) | Set a limit for the amount of tags |
 | on-change | Function | undefined | Callback to get the tags when there is a change |
 | validate | String | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate`
+| addTagOnKeys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
 
 **This project was built with [generator-vue-component](https://github.com/ianaya89/generator-vue-component) ❤️**
 

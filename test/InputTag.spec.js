@@ -31,9 +31,14 @@ describe('InputTag.vue', () => {
 
   describe('addNew()', () => {
     it('should add a new tag', () => {
-      InputTagComponent.addNew('foo bar')
-      InputTagComponent.addNew('foo')
-      InputTagComponent.addNew('bar')
+      InputTagComponent.newTag = 'foo bar'
+      InputTagComponent.addNew()
+
+      InputTagComponent.newTag = 'foo'
+      InputTagComponent.addNew()
+
+      InputTagComponent.newTag = 'bar'
+      InputTagComponent.addNew()
 
       expect(InputTagComponent.innerTags.length).toEqual(3)
     })
@@ -41,9 +46,15 @@ describe('InputTag.vue', () => {
 
   describe('remove(index)', () => {
     it('should remove a tag', () => {
-      InputTagComponent.addNew('foo bar')
-      InputTagComponent.addNew('foo')
-      InputTagComponent.addNew('bar')
+      InputTagComponent.newTag = 'foo bar'
+      InputTagComponent.addNew()
+
+      InputTagComponent.newTag = 'foo'
+      InputTagComponent.addNew()
+
+      InputTagComponent.newTag = 'bar'
+      InputTagComponent.addNew()
+
       InputTagComponent.remove(0)
 
       expect(InputTagComponent.innerTags.length).toEqual(2)
@@ -52,9 +63,15 @@ describe('InputTag.vue', () => {
 
   describe('removeLastTag()', () => {
     it('should remove the last tag', () => {
-      InputTagComponent.addNew('foo bar')
-      InputTagComponent.addNew('foo')
-      InputTagComponent.addNew('bar')
+      InputTagComponent.newTag = 'foo bar'
+      InputTagComponent.addNew()
+
+      InputTagComponent.newTag = 'foo'
+      InputTagComponent.addNew()
+
+      InputTagComponent.newTag = 'bar'
+      InputTagComponent.addNew()
+
       InputTagComponent.removeLastTag()
 
       expect(InputTagComponent.innerTags.length).toEqual(2)
@@ -112,35 +129,26 @@ describe('InputTag.vue', () => {
     })
   })
 
-  // describe('placeholder="Add Tag"', () => {
-  //   const placeholder = 'Add Tag'
-  //   const InputTagComponentWithPlaceholder = new ClonedComponent({
-  //     data () { return { placeholder } }
-  //   }).$mount()
-
-  //   it('should have a placeholder', () => {
-  //     renderer.renderToString(InputTagComponentWithPlaceholder, (err, str) => {
-  //       if (err) { throw err }
-
-  //       const dom = new jsdom.JSDOM(str)
-  //       const input = dom.window.document.querySelector('input.new-tag')
-
-  //       expect(input.placeholder).toEqual(placeholder)
-  //     })
-  //   })
-  // })
-
   describe('validate="text"', () => {
     const InputTagTextOnly = new ClonedComponent({
       propsData: { validate: 'text' }
     }).$mount()
 
     it('should only add text values', () => {
-      InputTagTextOnly.addNew('foo')
-      InputTagTextOnly.addNew('123')
-      InputTagTextOnly.addNew('mati@tucci.me')
-      InputTagTextOnly.addNew('https://tucci.me')
-      InputTagTextOnly.addNew('2002-04-03')
+      InputTagTextOnly.newTag = 'foo'
+      InputTagTextOnly.addNew()
+
+      InputTagTextOnly.newTag = '123'
+      InputTagTextOnly.addNew()
+
+      InputTagTextOnly.newTag = 'mati@tucci.me'
+      InputTagTextOnly.addNew()
+
+      InputTagTextOnly.newTag = 'https://tucci.me'
+      InputTagTextOnly.addNew()
+
+      InputTagTextOnly.newTag = '2002-04-03'
+      InputTagTextOnly.addNew()
 
       expect(InputTagTextOnly.innerTags.length).toEqual(1)
     })
@@ -152,10 +160,17 @@ describe('InputTag.vue', () => {
     }).$mount()
 
     it('should only add digits values', () => {
-      InputTagDigitsOnly.addNew('foo')
-      InputTagDigitsOnly.addNew('123')
-      InputTagDigitsOnly.addNew('mati@tucci.me')
-      InputTagDigitsOnly.addNew('https://tucci.me')
+      InputTagDigitsOnly.newTag = 'foo'
+      InputTagDigitsOnly.addNew()
+
+      InputTagDigitsOnly.newTag = '123'
+      InputTagDigitsOnly.addNew()
+
+      InputTagDigitsOnly.newTag = 'mati@tucci.me'
+      InputTagDigitsOnly.addNew()
+
+      InputTagDigitsOnly.newTag = 'https://tucci.me'
+      InputTagDigitsOnly.addNew()
 
       expect(InputTagDigitsOnly.innerTags.length).toEqual(1)
     })
@@ -167,11 +182,20 @@ describe('InputTag.vue', () => {
     }).$mount()
 
     it('should only add text values', () => {
-      InputTagEmailOnly.addNew('foo')
-      InputTagEmailOnly.addNew('123')
-      InputTagEmailOnly.addNew('mati@tucci.me')
-      InputTagEmailOnly.addNew('https://tucci.me')
-      InputTagEmailOnly.addNew('2002-04-03')
+      InputTagEmailOnly.newTag = 'foo'
+      InputTagEmailOnly.addNew()
+
+      InputTagEmailOnly.newTag = '123'
+      InputTagEmailOnly.addNew()
+
+      InputTagEmailOnly.newTag = 'mati@tucci.me'
+      InputTagEmailOnly.addNew()
+
+      InputTagEmailOnly.newTag = 'https://tucci.me'
+      InputTagEmailOnly.addNew()
+
+      InputTagEmailOnly.newTag = '2002-04-03'
+      InputTagEmailOnly.addNew()
 
       expect(InputTagEmailOnly.innerTags.length).toEqual(1)
     })
@@ -183,11 +207,20 @@ describe('InputTag.vue', () => {
     }).$mount()
 
     it('should only add text values', () => {
-      InputTagUrlOnly.addNew('foo')
-      InputTagUrlOnly.addNew('123')
-      InputTagUrlOnly.addNew('mati@tucci.me')
-      InputTagUrlOnly.addNew('https://tucci.me')
-      InputTagUrlOnly.addNew('2002-04-03')
+      InputTagUrlOnly.newTag = 'foo'
+      InputTagUrlOnly.addNew()
+
+      InputTagUrlOnly.newTag = '123'
+      InputTagUrlOnly.addNew()
+
+      InputTagUrlOnly.newTag = 'mati@tucci.me'
+      InputTagUrlOnly.addNew()
+
+      InputTagUrlOnly.newTag = 'https://tucci.me'
+      InputTagUrlOnly.addNew()
+
+      InputTagUrlOnly.newTag = '2002-04-03'
+      InputTagUrlOnly.addNew()
 
       expect(InputTagUrlOnly.innerTags.length).toEqual(1)
     })
@@ -199,11 +232,20 @@ describe('InputTag.vue', () => {
     }).$mount()
 
     it('should only add text values', () => {
-      InputTagISODateOnly.addNew('foo')
-      InputTagISODateOnly.addNew('123')
-      InputTagISODateOnly.addNew('mati@tucci.me')
-      InputTagISODateOnly.addNew('https://tucci.me')
-      InputTagISODateOnly.addNew('2002-04-03')
+      InputTagISODateOnly.newTag = 'foo'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '123'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'mati@tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'https://tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '2002-04-03'
+      InputTagISODateOnly.addNew()
 
       expect(InputTagISODateOnly.innerTags.length).toEqual(1)
     })
