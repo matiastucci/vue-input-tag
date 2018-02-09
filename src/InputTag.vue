@@ -39,110 +39,105 @@
                         13, // Return
                         188, // Comma ','
                         9 // Tab
-                    ];
-                },
+                    ]
+                }
+            }
+        },
+
+        data () {
+            return {
+                newTag: '',
+                innerTags: [...this.tags]
+            }
+        },
+
+        watch: {
+            tags () {
+                this.innerTags = [...this.tags]
+            }
+        },
+
+        computed: {
+            isLimit: function () {
+                return this.limit > 0 && Number(this.limit) === this.innerTags.length
+            }
+        },
+
+        methods: {
+            focusNewTag () {
+                if (this.readOnly || !this.$el.querySelector('.new-tag')) { return }
+                this.$el.querySelector('.new-tag').focus()
             },
 
-            data() {
-                return {
-                    newTag: '',
-                    innerTags: [...this.tags]
+            addNew (e) {
+                // Do nothing if the current key code is
+                // not within those defined within the addTagOnKeys prop array.
+                if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
+                    return
+                }
+
+                // We prevent default & stop propagation for all
+                // keys except tabs (used to move between controls)
+                if (e && e.keyCode !== 9) {
+                    e.stopPropagation()
+                    e.preventDefault()
+                }
+
+                if (
+                    this.newTag &&
+                    this.innerTags.indexOf(this.newTag) === -1 &&
+                    this.validateIfNeeded(this.newTag)
+                ) {
+                    this.innerTags.push(this.newTag)
+                    this.newTag = ''
+                    this.tagChange()
                 }
             },
 
-            watch: {
-                tags() {
-                    this.innerTags = [...this.tags]
-                }
-            },
-
-            computed: {
-                isLimit: function () {
-                    return this.limit > 0 && Number(this.limit) === this.innerTags.length
-                }
-            },
-
-            methods: {
-                focusNewTag() {
-                    if (this.readOnly || !this.$el.querySelector('.new-tag')) {
-                        return
-                    }
-                    this.$el.querySelector('.new-tag').focus()
-                },
-
-                addNew(e) {
-                    // Do nothing if the current key code is 
-                    // not within those defined within the addTagOnKeys prop array.
-                    if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
-                        return
-                    }
-
-                    // We prevent default & stop propagation for all 
-                    // keys except tabs (used to move between controls)
-                    if (e && e.keyCode !== 9) {
-                        e.stopPropagation()
-                        e.preventDefault()
-                    }
-
-                    if (
-                        this.newTag &&
-                        this.innerTags.indexOf(this.newTag) === -1 &&
-                        this.validateIfNeeded(this.newTag)
-                    ) {
-                        this.innerTags.push(this.newTag)
-                        this.newTag = ''
-                        this.tagChange()
-                    }
-                },
-
-                validateIfNeeded(tagValue) {
-                    if (this.validate === '' || this.validate === undefined) {
-                        return true
-                    } else if (typeof (this.validate) === 'string' && Object.keys(validators).indexOf(this.validate) > -1) {
-                        return validators[this.validate].test(tagValue)
-                    } else if (typeof (this.validate) === 'object' && this.validate.test !== undefined) {
-                        return this.validate.test(tagValue)
-                    }
+            validateIfNeeded (tagValue) {
+                if (this.validate === '' || this.validate === undefined) {
                     return true
-                },
-
-                remove(index) {
-                    this.innerTags.splice(index, 1)
-                    this.tagChange()
-                },
-
-                removeLastTag() {
-                    if (this.newTag) {
-                        return
-                    }
-                    this.innerTags.pop()
-                    this.tagChange()
-                },
-
-                tagChange() {
-                    this.$emit('update:tags', this.innerTags)
+                } else if (typeof (this.validate) === 'string' && Object.keys(validators).indexOf(this.validate) > -1) {
+                    return validators[this.validate].test(tagValue)
+                } else if (typeof (this.validate) === 'object' && this.validate.test !== undefined) {
+                    return this.validate.test(tagValue)
                 }
+                return true
+            },
+
+            remove (index) {
+                this.innerTags.splice(index, 1)
+                this.tagChange()
+            },
+
+            removeLastTag () {
+                if (this.newTag) { return }
+                this.innerTags.pop()
+                this.tagChange()
+            },
+
+            tagChange () {
+                this.$emit('update:tags', this.innerTags)
             }
         }
     }
 </script>
 
 <template>
-    <div @click="focusNewTag()" :class="{'read-only': readOnly}"
-         class="vue-input-tag-wrapper">
+    <div @click="focusNewTag()" :class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
     <span v-for="(tag, index) in innerTags" :key="index" class="input-tag">
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
         <input
-                v-if="!readOnly && !isLimit"
-                ref="inputtag"
-                :placeholder="placeholder"
-                type="text"
-                v-model="newTag"
-                v-on:keydown.delete.stop="removeLastTag"
-                v-on:keydown="addNew"
-                class="new-tag"
+                v-if                     = "!readOnly && !isLimit"
+                ref                      = "inputtag"
+                :placeholder             = "placeholder"
+                type                     = "text"
+                v-model                  = "newTag"
+                v-on:keydown.delete.stop = "removeLastTag"
+                v-on:keydown             = "addNew"
+                class                    = "new-tag"
         />
     </div>
 </template>
