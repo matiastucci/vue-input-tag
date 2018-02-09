@@ -29,7 +29,7 @@ import InputTag from 'vue-input-tag'
 ## Usage
 
 ``` html
-<input-tag :on-change="callbackMethod" :tags="tagsArray"></input-tag>
+<input-tag :tags.sync="tagsArray"></input-tag>
 ```
 
 ## Props
@@ -38,8 +38,10 @@ import InputTag from 'vue-input-tag'
 | tags | Array | [] | Tags to be render in the input |
 | placeholder | String | "" | Placeholder to be shown when no tags |
 | read-only | Boolean | false | Set input to readonly |
-| on-change | Function | undefined | Callback to get the tags when there is a change |
+| limit | String or Number | -1 (none) | Set a limit for the amount of tags |
+| on-change | Function | undefined | Callback to get the tags when there is a change | 
 | validate | String/Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate` or pass a `RegExp` object for custom validation |
+| addTagOnKeys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag 
 
 **This project was built with [generator-vue-component](https://github.com/ianaya89/generator-vue-component) ❤️**
 

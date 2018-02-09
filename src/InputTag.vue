@@ -1,60 +1,103 @@
 <script>
-  /*eslint-disable*/
-  const validators = {
-    email: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-    url : new RegExp(/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i),
-    text : new RegExp(/^[a-zA-Z]+$/),
-    digits : new RegExp(/^[\d() \.\:\-\+#]+$/),
-    isodate : new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
-  }
-  /*eslint-enable*/
+/*eslint-disable*/
+ const validators = {
+  email: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+  url: new RegExp(/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i),
+  text: new RegExp(/^[a-zA-Z]+$/),
+  digits: new RegExp(/^[\d() \.\:\-\+#]+$/),
+  isodate: new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
+}
+/*eslint-enable*/
 
-  export default {
-    name: 'InputTag',
+export default {
+  name: 'InputTag',
 
-    props: {
-      tags: {
-        type: Array,
-        default: () => []
-      },
-      placeholder: {
-        type: String,
-        default: ''
-      },
-      onChange: {
-        type: Function
-      },
-      readOnly: {
-        type: Boolean,
-        default: false
-      },
-      validate: {
+  props: {
+    tags: {
+      type: Array,
+      default: () => []
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    readOnly: {
+      type: Boolean,
+      default: false
+    },
+    validate: {
+      type: String,
+      default: ''
+    },
+    addTagOnKeys: {
+      type: Array,
+      default: function () {
+        return [
+          13, // Return
+          188, // Comma ','
+          9 // Tab
+        ] 
+    validate: {
         type: String|Object,
-        default: ''
+        default: '' 
       }
     },
+    limit: {
+      default: -1
+    }
+  },
 
-    data () {
-      return {
-        newTag: ''
+  data () {
+    return {
+      newTag: '',
+      innerTags: [...this.tags]
+    }
+  },
+
+  watch: {
+    tags () {
+      this.innerTags = [...this.tags]
+    }
+  },
+
+  computed: {
+    isLimit: function () {
+      return this.limit > 0 && Number(this.limit) === this.innerTags.length
+    }
+  },
+
+  methods: {
+    focusNewTag () {
+      if (this.readOnly || !this.$el.querySelector('.new-tag')) { return }
+      this.$el.querySelector('.new-tag').focus()
+    }, 
+      
+  addNew (e) {
+      // Do nothing if the current key code is 
+      // not within those defined within the addTagOnKeys prop array.
+      if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
+        return
+      } 
+
+      // We prevent default & stop propagation for all 
+      // keys except tabs (used to move between controls)
+      if (e && e.keyCode !== 9) {
+        e.stopPropagation()
+        e.preventDefault()
       }
-    },
 
-    methods: {
-      focusNewTag () {
-        if (this.readOnly) { return }
-        this.$el.querySelector('.new-tag').focus()
-      },
-
-      addNew (tag) {
-        if (tag && this.tags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
-          this.tags.push(tag)
-          this.tagChange()
-        }
+      if (
+        this.newTag &&
+        this.innerTags.indexOf(this.newTag) === -1 &&
+        this.validateIfNeeded(this.newTag)
+      ) {
+        this.innerTags.push(this.newTag)
         this.newTag = ''
-      },
-
-      validateIfNeeded (tagValue) {
+        this.tagChange()
+      }
+    },
+    
+    validateIfNeeded (tagValue) {
         if (this.validate === '' || this.validate === undefined) {
           return true
         } else if (typeof (this.validate) === 'string' && Object.keys(validators).indexOf(this.validate) > -1) {
@@ -63,43 +106,46 @@
             return this.validate.test(tagValue)
         }
         return true
-      },
+    },
 
-      remove (index) {
-        this.tags.splice(index, 1)
-        this.tagChange()
-      },
+    remove (index) {
+      this.innerTags.splice(index, 1)
+      this.tagChange()
+    },
 
-      removeLastTag () {
-        if (this.newTag) { return }
-        this.tags.pop()
-        this.tagChange()
-      },
+    removeLastTag () {
+      if (this.newTag) { return }
+      this.innerTags.pop()
+      this.tagChange()
+    },
 
-      tagChange () {
-        if (this.onChange) {
-          // avoid passing the observer
-          this.onChange(JSON.parse(JSON.stringify(this.tags)))
-        }
-      }
+    tagChange () {
+      this.$emit('update:tags', this.innerTags)
     }
   }
+}
 </script>
 
 <template>
-
-  <div @click="focusNewTag()" v-bind:class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
-    <span v-for="(tag, index) in tags" v-bind:key="index" class="input-tag">
+  <div @click="focusNewTag()" :class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
+    <span v-for="(tag, index) in innerTags" :key="index" class="input-tag">
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
-    <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.188.tab.prevent.stop="addNew(newTag)" class="new-tag"/>
+    <input
+      v-if                     = "!readOnly && !isLimit"
+      ref                      = "inputtag"
+      :placeholder             = "placeholder"
+      type                     = "text"
+      v-model                  = "newTag"
+      v-on:keydown.delete.stop = "removeLastTag"
+      v-on:keydown             = "addNew"
+      class                    = "new-tag"
+    />
   </div>
-
 </template>
 
 <style>
-
   .vue-input-tag-wrapper {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -149,11 +195,9 @@
     outline: none;
     padding: 4px;
     padding-left: 0;
-    width: 80px;
   }
 
   .vue-input-tag-wrapper.read-only {
     cursor: default;
   }
-
 </style>
