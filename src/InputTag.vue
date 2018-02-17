@@ -1,5 +1,5 @@
 <script>
-/*eslint-disable*/
+/* eslint-disable */
  const validators = {
   email: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
   url: new RegExp(/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i),
@@ -7,7 +7,7 @@
   digits: new RegExp(/^[\d() \.\:\-\+#]+$/),
   isodate: new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
 }
-/*eslint-enable*/
+/* eslint-enable */
 
 export default {
   name: 'InputTag',
@@ -18,6 +18,10 @@ export default {
       default: () => []
     },
     placeholder: {
+      type: String,
+      default: ''
+    },
+    input_class: {
       type: String,
       default: ''
     },
@@ -70,13 +74,13 @@ export default {
     },
 
     addNew (e) {
-      // Do nothing if the current key code is 
+      // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
       if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
         return
       }
 
-      // We prevent default & stop propagation for all 
+      // We prevent default & stop propagation for all
       // keys except tabs (used to move between controls)
       if (e && e.keyCode !== 9) {
         e.stopPropagation()
@@ -135,7 +139,7 @@ export default {
       v-model                  = "newTag"
       v-on:keydown.delete.stop = "removeLastTag"
       v-on:keydown             = "addNew"
-      class                    = "new-tag"
+      :class                    = "'new-tag ' + input_class"
     />
   </div>
 </template>

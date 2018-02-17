@@ -13,7 +13,8 @@
         tags: ['Jerry', 'Kramer', 'Elaine', 'George'],
         limit: 10,
         htmlCode: '',
-        validate: ''
+        validate: '',
+        input_class:'form-control'
       }
     },
 
@@ -92,7 +93,8 @@
           :tags.sync='tags',
           :placeholder='placeholder',
           :read-only='readOnly',
-          :validate='validate'
+          :validate='validate',
+          :input_class='input_class',
         )
 
         code {{ getPreviewHTML() }}
