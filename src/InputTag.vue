@@ -76,9 +76,7 @@ export default {
         return
       }
 
-      // We prevent default & stop propagation for all
-      // keys except tabs (used to move between controls)
-      if (e && e.keyCode !== 9) {
+      if (e) {
         e.stopPropagation()
         e.preventDefault()
       }
