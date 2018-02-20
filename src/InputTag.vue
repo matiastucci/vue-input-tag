@@ -26,7 +26,7 @@ export default {
       default: false
     },
     validate: {
-      type: String,
+      type: String | Object,
       default: ''
     },
     addTagOnKeys: {
@@ -70,15 +70,13 @@ export default {
     },
 
     addNew (e) {
-      // Do nothing if the current key code is 
+      // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
       if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
         return
       }
 
-      // We prevent default & stop propagation for all 
-      // keys except tabs (used to move between controls)
-      if (e && e.keyCode !== 9) {
+      if (e) {
         e.stopPropagation()
         e.preventDefault()
       }
@@ -97,8 +95,10 @@ export default {
     validateIfNeeded (tagValue) {
       if (this.validate === '' || this.validate === undefined) {
         return true
-      } else if (Object.keys(validators).indexOf(this.validate) > -1) {
+      } else if (typeof (this.validate) === 'string' && Object.keys(validators).indexOf(this.validate) > -1) {
         return validators[this.validate].test(tagValue)
+      } else if (typeof (this.validate) === 'object' && this.validate.test !== undefined) {
+        return this.validate.test(tagValue)
       }
       return true
     },
@@ -150,6 +150,8 @@ export default {
     cursor: text;
     text-align: left;
     -webkit-appearance: textfield;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .vue-input-tag-wrapper .input-tag {
@@ -190,6 +192,7 @@ export default {
     outline: none;
     padding: 4px;
     padding-left: 0;
+    flex-grow: 1;
   }
 
   .vue-input-tag-wrapper.read-only {
