@@ -70,13 +70,13 @@ export default {
     },
 
     addNew (e) {
-      // Do nothing if the current key code is 
+      // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
       if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
         return
       }
 
-      // We prevent default & stop propagation for all 
+      // We prevent default & stop propagation for all
       // keys except tabs (used to move between controls)
       if (e && e.keyCode !== 9) {
         e.stopPropagation()
@@ -150,6 +150,8 @@ export default {
     cursor: text;
     text-align: left;
     -webkit-appearance: textfield;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .vue-input-tag-wrapper .input-tag {
@@ -190,6 +192,7 @@ export default {
     outline: none;
     padding: 4px;
     padding-left: 0;
+    flex-grow: 1;
   }
 
   .vue-input-tag-wrapper.read-only {
