@@ -39,6 +39,10 @@ export default {
         ]
       }
     },
+    addTagOnBlur: {
+      type: Boolean,
+      default: false
+    },
     limit: {
       default: -1
     }
@@ -72,7 +76,8 @@ export default {
     addNew (e) {
       // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
-      if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1) || this.isLimit) {
+      if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1 &&
+              (e.type !== 'blur' || !this.addTagOnBlur)) || this.isLimit) {
         return
       }
 
@@ -135,6 +140,7 @@ export default {
       v-model                  = "newTag"
       v-on:keydown.delete.stop = "removeLastTag"
       v-on:keydown             = "addNew"
+      v-on:blur                = "addNew"
       class                    = "new-tag"
     />
   </div>
