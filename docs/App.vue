@@ -9,6 +9,7 @@
     data () {
       return {
         readOnly: false,
+        addTagOnBlur: false,
         placeholder: 'Add Tag',
         tags: ['Jerry', 'Kramer', 'Elaine', 'George'],
         limit: 10,
@@ -23,6 +24,7 @@
         html += this.placeholder ? ` placeholder="${this.placeholder}"` : ''
         html += this.tags ? ' :tags.sync="tags"' : ''
         html += this.readOnly ? ' :read-only="true"' : ''
+        html += this.addTagOnBlur ? ' :add-tag-on-blur="true"' : ''
         html += this.limit ? ' :limit="limit"' : ''
         html += this.validate ? ` validate="${this.validate}"` : ''
         return `${html}></input-tag>`
@@ -70,6 +72,10 @@
           input(v-model='readOnly' type='checkbox')
 
         .form-group
+          p.label addTagOnBlur:
+          input(v-model='addTagOnBlur' type='checkbox')
+
+        .form-group
           p.label limit:
           input(v-model='limit' type='number')
 
@@ -93,6 +99,7 @@
           :placeholder='placeholder',
           :read-only='readOnly',
           :validate='validate'
+          :addTagOnBlur='addTagOnBlur'
         )
 
         code {{ getPreviewHTML() }}
@@ -112,7 +119,7 @@
   .form-group {
     p.label {
       display: inline-block;
-      margin-right: 1rem;
+      margin-right: 2rem;
       width: 100px;
     }
     input {
