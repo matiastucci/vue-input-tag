@@ -39,7 +39,6 @@ import InputTag from 'vue-input-tag'
 | placeholder | String | "" | Placeholder to be shown when no tags |
 | read-only | Boolean | false | Set input to readonly |
 | limit | String or Number | -1 (none) | Set a limit for the amount of tags |
-| on-change | Function | undefined | Callback to get the tags when there is a change |
 | validate | String/Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate` or pass a `RegExp` object for custom validation |
 | addTagOnKeys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
 
