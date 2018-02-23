@@ -16,19 +16,36 @@
 
 ## Installation
 
-``` bash
+#### NPM
+
+```bash
 npm install vue-input-tag --save
 ```
 
-and in your component:
+Register the component
 
-``` javascript
+```js
 import InputTag from 'vue-input-tag'
+```
+
+#### CDN
+
+Just include `vue` & `vue-input-tag.js`. I recommend using [unpkg](https://unpkg.com/#/).
+
+```html
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vue-input-tag"></script>
+```
+
+Then register the component in your javascript:
+
+```js
+Vue.component('v-input-tag', InputTag);
 ```
 
 ## Usage
 
-``` html
+```html
 <input-tag :tags.sync="tagsArray"></input-tag>
 ```
 
