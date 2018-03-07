@@ -46,7 +46,7 @@ Vue.component('input-tag', InputTag);
 ## Usage
 
 ```html
-<input-tag :tags.sync="tagsArray"></input-tag>
+<v-input-tag :tags.sync="tagsArray"></v-input-tag>
 ```
 
 ## Props
