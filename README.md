@@ -40,7 +40,7 @@ Just include `vue` & `vue-input-tag.js`. I recommend using [unpkg](https://unpkg
 Then register the component in your javascript:
 
 ```js
-Vue.component('v-input-tag', InputTag);
+Vue.component('input-tag', InputTag);
 ```
 
 ## Usage
