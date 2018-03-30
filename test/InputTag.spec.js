@@ -250,4 +250,22 @@ describe('InputTag.vue', () => {
       expect(InputTagISODateOnly.innerTags.length).toEqual(1)
     })
   })
+
+  describe('CSS classes depending of input state', () => {
+    it('should add activity class when input is focused', () => {
+      InputTagComponent.$refs.inputtag.focus()
+      return Vue.nextTick()
+        .then(() => {
+          expect(InputTagComponent.$el.classList.contains('vue-input-tag-wrapper--active')).toBe(true)
+        })
+    })
+
+    it('should remove activity class when input is blurred', () => {
+      InputTagComponent.$refs.inputtag.blur()
+      return Vue.nextTick()
+        .then(() => {
+          expect(InputTagComponent.$el.classList.contains('vue-input-tag-wrapper--active')).toBe(false)
+        })
+    })
+  })
 })
