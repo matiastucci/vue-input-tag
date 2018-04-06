@@ -81,7 +81,6 @@ export default {
     },
 
     addNew (e) {
-      this.onInput()
       // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
       if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1 &&
@@ -134,6 +133,14 @@ export default {
     onInput () {
       this.$emit('input', this.newTag)
       this.$emit('change', this.newTag)
+    },
+    onKeyDown (e) {
+      this.$emit('keydown', e)
+      this.addNew(e)
+    },
+    onBlur (e) {
+      this.$emit('blur', e)
+      this.addNew(e)
     }
   }
 }
@@ -153,8 +160,8 @@ export default {
       v-model                  = "newTag"
       v-on:input               = "onInput"
       v-on:keydown.delete.stop = "removeLastTag"
-      v-on:keydown             = "addNew"
-      v-on:blur                = "addNew"
+      v-on:keydown             = "onKeyDown"
+      v-on:blur                = "onBlur"
       class                    = "new-tag"
     />
   </div>
