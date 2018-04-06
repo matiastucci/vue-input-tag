@@ -7,7 +7,7 @@
   digits: new RegExp(/^[\d() \.\:\-\+#]+$/),
   isodate: new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
 }
-/*eslint-enable*/
+/* eslint-enable */
 
 export default {
   name: 'InputTag',
@@ -27,6 +27,10 @@ export default {
     },
     validate: {
       type: String | Object,
+      default: ''
+    },
+    value: {
+      type: String,
       default: ''
     },
     addTagOnKeys: {
@@ -58,6 +62,9 @@ export default {
   watch: {
     tags () {
       this.innerTags = [...this.tags]
+    },
+    value (val) {
+      this.newTag = val
     }
   },
 
@@ -74,6 +81,7 @@ export default {
     },
 
     addNew (e) {
+      this.onInput()
       // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
       if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1 &&
@@ -114,6 +122,7 @@ export default {
     },
 
     removeLastTag () {
+      this.onInput()
       if (this.newTag) { return }
       this.innerTags.pop()
       this.tagChange()
@@ -121,6 +130,10 @@ export default {
 
     tagChange () {
       this.$emit('update:tags', this.innerTags)
+    },
+    onInput () {
+      this.$emit('input', this.newTag)
+      this.$emit('change', this.newTag)
     }
   }
 }
@@ -138,6 +151,7 @@ export default {
       :placeholder             = "placeholder"
       type                     = "text"
       v-model                  = "newTag"
+      v-on:input               = "onInput"
       v-on:keydown.delete.stop = "removeLastTag"
       v-on:keydown             = "addNew"
       v-on:blur                = "addNew"
