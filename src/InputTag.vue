@@ -25,6 +25,10 @@ export default {
       type: Boolean,
       default: false
     },
+    labels: {
+      type: Boolean,
+      default: false
+    },
     validate: {
       type: String | Object,
       default: ''
@@ -95,10 +99,10 @@ export default {
 
       if (
         this.newTag &&
-        this.innerTags.indexOf(this.newTag) === -1 &&
+        this.innerTags.indexOf(this.buildTag()) === -1 &&
         this.validateIfNeeded(this.newTag)
       ) {
-        this.innerTags.push(this.newTag)
+        this.innerTags.push(this.buildTag())
         this.newTag = ''
         this.tagChange()
         this.onInput()
@@ -115,7 +119,9 @@ export default {
       }
       return true
     },
-
+    buildTag () {
+      return this.labels ? { label: this.newTag, value: this.newTag } : this.newTag
+    },
     remove (index) {
       this.innerTags.splice(index, 1)
       this.tagChange()
@@ -150,7 +156,7 @@ export default {
 <template>
   <div @click="focusNewTag()" :class="{'read-only': readOnly}" class="vue-input-tag-wrapper">
     <span v-for="(tag, index) in innerTags" :key="index" class="input-tag">
-      <span>{{ tag }}</span>
+      <span>{{ labels ? tag.label : tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
     <input
