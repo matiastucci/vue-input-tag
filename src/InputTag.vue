@@ -96,7 +96,9 @@ export default {
         e.stopPropagation()
         e.preventDefault()
       }
-
+      this.moveNewTag()
+    },
+    moveNewTag () {
       if (
         this.newTag &&
         this.innerTags.indexOf(this.buildTag()) === -1 &&
@@ -108,7 +110,6 @@ export default {
         this.onInput()
       }
     },
-
     validateIfNeeded (tagValue) {
       if (this.validate === '' || this.validate === undefined) {
         return true
