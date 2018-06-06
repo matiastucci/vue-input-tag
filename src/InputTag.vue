@@ -26,7 +26,7 @@ export default {
       default: false
     },
     validate: {
-      type: String | Object,
+      type   : String | Object | Function,
       default: ''
     },
     addTagOnKeys: {
@@ -44,8 +44,13 @@ export default {
       default: false
     },
     limit: {
+      type: Number,
       default: -1
-    }
+    },
+    allowRepeat : {
+      type: Boolean,
+      default: false
+    },
   },
 
   data () {
@@ -88,7 +93,7 @@ export default {
 
       if (
         this.newTag &&
-        this.innerTags.indexOf(this.newTag) === -1 &&
+        (this.allowRepeat || this.innerTags.indexOf(this.newTag) === -1) &&
         this.validateIfNeeded(this.newTag)
       ) {
         this.innerTags.push(this.newTag)
@@ -102,6 +107,8 @@ export default {
         return true
       } else if (typeof (this.validate) === 'string' && Object.keys(validators).indexOf(this.validate) > -1) {
         return validators[this.validate].test(tagValue)
+      } else if (typeof (this.validate) === "function" && this.validate.call !== undefined) {
+        return this.validate.call(null, tagValue);
       } else if (typeof (this.validate) === 'object' && this.validate.test !== undefined) {
         return this.validate.test(tagValue)
       }
