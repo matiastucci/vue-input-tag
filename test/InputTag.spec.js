@@ -12,14 +12,18 @@ describe('InputTag.vue', () => {
 
   beforeEach((cb) => {
     InputTagComponent = new ClonedComponent({
-      data () { return { innerTags: [] } }
+      data () {
+        return { innerTags: [] }
+      }
     }).$mount()
     cb()
   })
 
   it('should have a new tag input without placeholder', () => {
     renderer.renderToString(InputTagComponent, (err, str) => {
-      if (err) { throw err }
+      if (err) {
+        throw err
+      }
 
       const dom = new jsdom.JSDOM(str)
       const input = dom.window.document.querySelector('input.new-tag')
@@ -80,13 +84,17 @@ describe('InputTag.vue', () => {
 
   describe('read-only="true"', () => {
     const InputTagComponentReadOnly = new ClonedComponent({
-      data () { return { innerTags: [] } },
+      data () {
+        return { innerTags: [] }
+      },
       propsData: { readOnly: true }
     }).$mount()
 
     it('should have a read-only CSS class and shouldn\'t have a remove tag button', () => {
       renderer.renderToString(InputTagComponentReadOnly, (err, str) => {
-        if (err) { throw err }
+        if (err) {
+          throw err
+        }
 
         const dom = new jsdom.JSDOM(str)
         const input = dom.window.document.querySelector('.read-only')
@@ -98,7 +106,9 @@ describe('InputTag.vue', () => {
 
     it('shouldn\'t have a new tag input', () => {
       renderer.renderToString(InputTagComponentReadOnly, (err, str) => {
-        if (err) { throw err }
+        if (err) {
+          throw err
+        }
 
         const dom = new jsdom.JSDOM(str)
         const input = dom.window.document.querySelector('input.new-tag')
@@ -110,7 +120,9 @@ describe('InputTag.vue', () => {
 
   describe('tags="[1,2,3]"', () => {
     const InputTagComponentWithTags = new ClonedComponent({
-      data () { return { innerTags: ['Jerry', 'Kramer', 'Elaine'] } }
+      data () {
+        return { innerTags: ['Jerry', 'Kramer', 'Elaine'] }
+      }
     }).$mount()
 
     it('should load the tags', () => {
@@ -119,7 +131,9 @@ describe('InputTag.vue', () => {
 
     it('should have remove buttons', () => {
       renderer.renderToString(InputTagComponentWithTags, (err, str) => {
-        if (err) { throw err }
+        if (err) {
+          throw err
+        }
 
         const dom = new jsdom.JSDOM(str)
         const removeButtons = dom.window.document.querySelectorAll('a.remove')
@@ -251,21 +265,122 @@ describe('InputTag.vue', () => {
     })
   })
 
+  describe('do not allow duplicate tags by default', () => {
+    const InputTagISODateOnly = new ClonedComponent({
+      propsData: {}
+    }).$mount()
+
+    it('should only add unique tags', () => {
+      InputTagISODateOnly.newTag = 'foo'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '123'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'mati@tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'https://tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '123'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'mati@tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'https://tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '2002-04-03'
+      InputTagISODateOnly.addNew()
+
+      expect(InputTagISODateOnly.innerTags.length).toEqual(5)
+    })
+  })
+
+  describe('allow duplicate tags if allowDuplicates prop is true', () => {
+    const InputTagISODateOnly = new ClonedComponent({
+      propsData: { allowDuplicates: true }
+    }).$mount()
+
+    it('should add all tags', () => {
+      InputTagISODateOnly.newTag = 'foo'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '123'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'mati@tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'https://tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '123'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'mati@tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'https://tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '2002-04-03'
+      InputTagISODateOnly.addNew()
+
+      expect(InputTagISODateOnly.innerTags.length).toEqual(8)
+    })
+  })
+
+  describe('validate with function', () => {
+    const allowedTags = ['mati@tucci.me', 'https://tucci.me']
+    const validateFunction = tag => allowedTags.includes(tag)
+    const InputTagISODateOnly = new ClonedComponent({
+      propsData: { validate: validateFunction }
+    }).$mount()
+
+    it('should only add values validated with function', () => {
+      InputTagISODateOnly.newTag = 'foo'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '123'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'mati@tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = 'https://tucci.me'
+      InputTagISODateOnly.addNew()
+
+      InputTagISODateOnly.newTag = '2002-04-03'
+      InputTagISODateOnly.addNew()
+
+      expect(InputTagISODateOnly.innerTags.join()).toEqual(allowedTags.join())
+    })
+  })
+
   describe('CSS classes depending of input state', () => {
     it('should add activity class when input is focused', () => {
       InputTagComponent.$refs.inputtag.focus()
-      return Vue.nextTick()
-        .then(() => {
-          expect(InputTagComponent.$el.classList.contains('vue-input-tag-wrapper--active')).toBe(true)
-        })
+      return Vue.nextTick().then(() => {
+        expect(
+          InputTagComponent.$el.classList.contains(
+            'vue-input-tag-wrapper--active'
+          )
+        ).toBe(true)
+      })
     })
 
     it('should remove activity class when input is blurred', () => {
       InputTagComponent.$refs.inputtag.blur()
-      return Vue.nextTick()
-        .then(() => {
-          expect(InputTagComponent.$el.classList.contains('vue-input-tag-wrapper--active')).toBe(false)
-        })
+      return Vue.nextTick().then(() => {
+        expect(
+          InputTagComponent.$el.classList.contains(
+            'vue-input-tag-wrapper--active'
+          )
+        ).toBe(false)
+      })
     })
   })
 })
