@@ -26,7 +26,7 @@ export default {
       default: false
     },
     validate: {
-      type: String | Object,
+      type: String | Object | Function,
       default: ''
     },
     addTagOnKeys: {
@@ -113,6 +113,8 @@ export default {
         return validators[this.validate].test(tagValue)
       } else if (typeof (this.validate) === 'object' && this.validate.test !== undefined) {
         return this.validate.test(tagValue)
+      } else if (typeof (this.validate) === 'function') {
+        return this.validate(tagValue)
       }
       return true
     },
