@@ -45,6 +45,10 @@ Vue.component('input-tag', InputTag);
 ```html
 <input-tag :tags.sync="tagsArray"></input-tag>
 ```
+or to only allow adding 'green', 'yellow' or 'red' tags:
+```html
+<input-tag :tags.sync="tagsArray" :validate="tag => ['green','yellow','red'].includes(tag)"></input-tag>
+```
 
 ## Props
 | Name | Type | Default | Description |
@@ -54,8 +58,9 @@ Vue.component('input-tag', InputTag);
 | read-only | Boolean | false | Set input to readonly |
 | addTagOnBlur | Boolean | false | Add tag on input blur |
 | limit | String or Number | -1 (none) | Set a limit for the amount of tags |
-| validate | String/Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate` or pass a `RegExp` object for custom validation |
+| validate | String or Function or Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate`. Or pass a `function` or a `RegExp` object for custom validation |
 | addTagOnKeys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
+| allowDuplicates | Boolean | false | Allow duplicate tags
 
 **This project was built with [generator-vue-component](https://github.com/ianaya89/generator-vue-component) ❤️**
 

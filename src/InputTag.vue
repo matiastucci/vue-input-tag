@@ -1,8 +1,12 @@
 <script>
 /* eslint-disable */
- const validators = {
-  email: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-  url: new RegExp(/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i),
+const validators = {
+  email: new RegExp(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  ),
+  url: new RegExp(
+    /^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i
+  ),
   text: new RegExp(/^[a-zA-Z]+$/),
   digits: new RegExp(/^[\d() \.\:\-\+#]+$/),
   isodate: new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
@@ -26,7 +30,7 @@ export default {
       default: false
     },
     validate: {
-      type: String | Object,
+      type: String | Function | Object,
       default: ''
     },
     addTagOnKeys: {
@@ -44,7 +48,12 @@ export default {
       default: false
     },
     limit: {
+      type: Number,
       default: -1
+    },
+    allowDuplicates: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -70,7 +79,9 @@ export default {
 
   methods: {
     focusNewTag () {
-      if (this.readOnly || !this.$el.querySelector('.new-tag')) { return }
+      if (this.readOnly || !this.$el.querySelector('.new-tag')) {
+        return
+      }
       this.$el.querySelector('.new-tag').focus()
     },
 
@@ -86,8 +97,12 @@ export default {
     addNew (e) {
       // Do nothing if the current key code is
       // not within those defined within the addTagOnKeys prop array.
-      if ((e && this.addTagOnKeys.indexOf(e.keyCode) === -1 &&
-              (e.type !== 'blur' || !this.addTagOnBlur)) || this.isLimit) {
+      if (
+        (e &&
+          this.addTagOnKeys.indexOf(e.keyCode) === -1 &&
+          (e.type !== 'blur' || !this.addTagOnBlur)) ||
+        this.isLimit
+      ) {
         return
       }
       if (e) {
@@ -97,7 +112,7 @@ export default {
 
       if (
         this.newTag &&
-        this.innerTags.indexOf(this.newTag) === -1 &&
+        (this.allowDuplicates || this.innerTags.indexOf(this.newTag) === -1) &&
         this.validateIfNeeded(this.newTag)
       ) {
         this.innerTags.push(this.newTag)
@@ -109,9 +124,20 @@ export default {
     validateIfNeeded (tagValue) {
       if (this.validate === '' || this.validate === undefined) {
         return true
-      } else if (typeof (this.validate) === 'string' && Object.keys(validators).indexOf(this.validate) > -1) {
+      } else if (
+        typeof this.validate === 'string' &&
+        Object.keys(validators).indexOf(this.validate) > -1
+      ) {
         return validators[this.validate].test(tagValue)
-      } else if (typeof (this.validate) === 'object' && this.validate.test !== undefined) {
+      } else if (
+        typeof this.validate === 'function' &&
+        this.validate.call !== undefined
+      ) {
+        return this.validate(tagValue)
+      } else if (
+        typeof this.validate === 'object' &&
+        this.validate.test !== undefined
+      ) {
         return this.validate.test(tagValue)
       }
       return true
@@ -123,7 +149,9 @@ export default {
     },
 
     removeLastTag () {
-      if (this.newTag) { return }
+      if (this.newTag) {
+        return
+      }
       this.innerTags.pop()
       this.tagChange()
     },
@@ -164,61 +192,61 @@ export default {
 </template>
 
 <style>
-  .vue-input-tag-wrapper {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    overflow: hidden;
-    padding-left: 4px;
-    padding-top: 4px;
-    cursor: text;
-    text-align: left;
-    -webkit-appearance: textfield;
-    display: flex;
-    flex-wrap: wrap;
-  }
+.vue-input-tag-wrapper {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding-left: 4px;
+  padding-top: 4px;
+  cursor: text;
+  text-align: left;
+  -webkit-appearance: textfield;
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .vue-input-tag-wrapper .input-tag {
-    background-color: #cde69c;
-    border-radius: 2px;
-    border: 1px solid #a5d24a;
-    color: #638421;
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 400;
-    margin-bottom: 4px;
-    margin-right: 4px;
-    padding: 3px;
-  }
+.vue-input-tag-wrapper .input-tag {
+  background-color: #cde69c;
+  border-radius: 2px;
+  border: 1px solid #a5d24a;
+  color: #638421;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  padding: 3px;
+}
 
-  .vue-input-tag-wrapper .input-tag .remove {
-    cursor: pointer;
-    font-weight: bold;
-    color: #638421;
-  }
+.vue-input-tag-wrapper .input-tag .remove {
+  cursor: pointer;
+  font-weight: bold;
+  color: #638421;
+}
 
-  .vue-input-tag-wrapper .input-tag .remove:hover {
-    text-decoration: none;
-  }
+.vue-input-tag-wrapper .input-tag .remove:hover {
+  text-decoration: none;
+}
 
-  .vue-input-tag-wrapper .input-tag .remove::before {
-    content: " x";
-  }
+.vue-input-tag-wrapper .input-tag .remove::before {
+  content: " x";
+}
 
-  .vue-input-tag-wrapper .new-tag {
-    background: transparent;
-    border: 0;
-    color: #777;
-    font-size: 13px;
-    font-weight: 400;
-    margin-bottom: 6px;
-    margin-top: 1px;
-    outline: none;
-    padding: 4px;
-    padding-left: 0;
-    flex-grow: 1;
-  }
+.vue-input-tag-wrapper .new-tag {
+  background: transparent;
+  border: 0;
+  color: #777;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  margin-top: 1px;
+  outline: none;
+  padding: 4px;
+  padding-left: 0;
+  flex-grow: 1;
+}
 
-  .vue-input-tag-wrapper.read-only {
-    cursor: default;
-  }
+.vue-input-tag-wrapper.read-only {
+  cursor: default;
+}
 </style>

@@ -17,7 +17,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build:docs": "cross-env NODE_ENV=docs webpack --progress --hide-modules",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "lint:fix": "eslint --fix .",
+    "lint:fix": "eslint --fix --ext .js,.vue src test/unit/specs",
     "prepublish": "npm run build",
     "test": "jest --coverage"
   },
