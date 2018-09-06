@@ -2,6 +2,8 @@ import { shallowMount } from "@vue/test-utils";
 import InputTag from "@/components/InputTag.vue";
 
 function addTag(wrapper, newTag) {
+  // TODO: use wrapper.trigger('keydown', { which: 65 })
+  // so we have an event on the vm.addNew method
   wrapper.setData({ newTag });
   wrapper.vm.addNew();
 }

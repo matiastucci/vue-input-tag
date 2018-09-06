@@ -23,7 +23,7 @@ export default {
 
   methods: {
     getPreviewHTML() {
-      let html = "<InputTag";
+      let html = "<input-tag";
       html += this.placeholder ? ` placeholder="${this.placeholder}"` : "";
       html += this.tags ? ' :tags.sync="tags"' : "";
       html += this.readOnly ? ' :read-only="true"' : "";
@@ -31,7 +31,7 @@ export default {
       html += this.allowDuplicates ? ' :allow-duplicates="true"' : "";
       html += this.limit ? ' :limit="limit"' : "";
       html += this.validate ? ` validate="${this.validate}"` : "";
-      return `${html}/>`;
+      return `${html}></input-tag>`;
     }
   }
 };

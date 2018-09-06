@@ -14,6 +14,10 @@ a:hover {
   opacity: 0.8;
 }
 
+.site-footer a {
+  color: #046c43;
+}
+
 .btn {
   display: inline-block;
   margin-bottom: 1rem;

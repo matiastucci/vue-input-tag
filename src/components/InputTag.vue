@@ -97,11 +97,6 @@ export default {
     },
 
     addNew(e) {
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
-
       const keyShouldAddTag = e
         ? this.addTagOnKeys.indexOf(e.keyCode) !== -1
         : true;

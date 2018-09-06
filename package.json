@@ -1,6 +1,6 @@
 {
-  "name": "test",
-  "version": "1.0.4",
+  "name": "vue-input-tag",
+  "version": "1.0.5",
   "description": "Vue.js input tag editor component",
   "keywords": [
     "vueinputtag",
@@ -25,7 +25,9 @@
     "build": "vue-cli-service build",
     "build-bundle": "vue-cli-service build --target lib --name vueInputTag ./src/components/index.js",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "coveralls": "^3.0.2",
@@ -40,8 +42,11 @@
     "@vue/eslint-config-prettier": "^3.0.1",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^23.0.1",
     "gh-pages": "^1.2.0",
     "vue-template-compiler": "^2.5.17"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 4.0.0"
   }
 }

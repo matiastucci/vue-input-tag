@@ -19,35 +19,26 @@
 npm install vue-input-tag --save
 ```
 
-Register the component
+#### Yarn
+
+```bash
+yarn add vue-input-tag
+```
+
+## Register the component
 
 ```js
 import InputTag from 'vue-input-tag'
 ```
 
-#### CDN
-
-Just include `vue` & `vue-input-tag.js`. I recommend using [unpkg](https://unpkg.com/#/).
-
-```html
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vue-input-tag"></script>
-```
-
-Then register the component in your javascript:
-
 ```js
-Vue.component('input-tag', InputTag);
+Vue.component('input-tag', InputTag)
 ```
 
 ## Usage
 
 ```html
 <input-tag :tags.sync="tagsArray"></input-tag>
-```
-or to only allow adding 'green', 'yellow' or 'red' tags:
-```html
-<input-tag :tags.sync="tagsArray" :validate="tag => ['green','yellow','red'].includes(tag)"></input-tag>
 ```
 
 ## Props
@@ -61,6 +52,3 @@ or to only allow adding 'green', 'yellow' or 'red' tags:
 | validate | String or Function or Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate`. Or pass a `function` or a `RegExp` object for custom validation |
 | addTagOnKeys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
 | allowDuplicates | Boolean | false | Allow duplicate tags
-
-**This project was built with [generator-vue-component](https://github.com/ianaya89/generator-vue-component) ❤️**
-
