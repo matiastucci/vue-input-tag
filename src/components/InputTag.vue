@@ -9,12 +9,14 @@ const validators = {
   ),
   text: new RegExp(/^[a-zA-Z]+$/),
   digits: new RegExp(/^[\d() \.\:\-\+#]+$/),
-  isodate: new RegExp(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/)
-}
+  isodate: new RegExp(
+    /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/
+  )
+};
 /* eslint-enable */
 
 export default {
-  name: 'InputTag',
+  name: "InputTag",
 
   props: {
     tags: {
@@ -23,7 +25,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: ''
+      default: ""
     },
     readOnly: {
       type: Boolean,
@@ -31,16 +33,16 @@ export default {
     },
     validate: {
       type: String | Function | Object,
-      default: ''
+      default: ""
     },
     addTagOnKeys: {
       type: Array,
-      default: function () {
+      default: function() {
         return [
           13, // Return
           188, // Comma ','
           9 // Tab
-        ]
+        ];
       }
     },
     addTagOnBlur: {
@@ -57,57 +59,60 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      newTag: '',
+      newTag: "",
       innerTags: [...this.tags],
       isInputActive: false
-    }
+    };
   },
 
   watch: {
-    tags () {
-      this.innerTags = [...this.tags]
+    tags() {
+      this.innerTags = [...this.tags];
     }
   },
 
   computed: {
-    isLimit: function () {
-      return this.limit > 0 && Number(this.limit) === this.innerTags.length
+    isLimit: function() {
+      return this.limit > 0 && Number(this.limit) === this.innerTags.length;
     }
   },
 
   methods: {
-    focusNewTag () {
-      if (this.readOnly || !this.$el.querySelector('.new-tag')) {
-        return
+    focusNewTag() {
+      if (this.readOnly || !this.$el.querySelector(".new-tag")) {
+        return;
       }
-      this.$el.querySelector('.new-tag').focus()
+      this.$el.querySelector(".new-tag").focus();
     },
 
-    handleInputFocus () {
-      this.isInputActive = true
+    handleInputFocus() {
+      this.isInputActive = true;
     },
 
-    handleInputBlur (e) {
-      this.isInputActive = false
-      this.addNew(e)
+    handleInputBlur(e) {
+      this.isInputActive = false;
+      this.addNew(e);
     },
 
-    addNew (e) {
-      // Do nothing if the current key code is
-      // not within those defined within the addTagOnKeys prop array.
+    addNew(e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+
+      const keyShouldAddTag = e
+        ? this.addTagOnKeys.indexOf(e.keyCode) !== -1
+        : true;
+
+      const typeIsNotBlur = e && e.type !== "blur";
+
       if (
-        (e &&
-          this.addTagOnKeys.indexOf(e.keyCode) === -1 &&
-          (e.type !== 'blur' || !this.addTagOnBlur)) ||
+        (!keyShouldAddTag && (typeIsNotBlur || !this.addTagOnBlur)) ||
         this.isLimit
       ) {
-        return
-      }
-      if (e) {
-        e.stopPropagation()
-        e.preventDefault()
+        return;
       }
 
       if (
@@ -115,52 +120,56 @@ export default {
         (this.allowDuplicates || this.innerTags.indexOf(this.newTag) === -1) &&
         this.validateIfNeeded(this.newTag)
       ) {
-        this.innerTags.push(this.newTag)
-        this.newTag = ''
-        this.tagChange()
+        this.innerTags.push(this.newTag);
+        this.newTag = "";
+        this.tagChange();
       }
     },
 
-    validateIfNeeded (tagValue) {
-      if (this.validate === '' || this.validate === undefined) {
-        return true
-      } else if (
-        typeof this.validate === 'string' &&
+    validateIfNeeded(tagValue) {
+      if (this.validate === "" || this.validate === undefined) {
+        return true;
+      }
+
+      if (typeof this.validate === "function") {
+        return this.validate(tagValue);
+      }
+
+      if (
+        typeof this.validate === "string" &&
         Object.keys(validators).indexOf(this.validate) > -1
       ) {
-        return validators[this.validate].test(tagValue)
-      } else if (
-        typeof this.validate === 'function' &&
-        this.validate.call !== undefined
-      ) {
-        return this.validate(tagValue)
-      } else if (
-        typeof this.validate === 'object' &&
+        return validators[this.validate].test(tagValue);
+      }
+
+      if (
+        typeof this.validate === "object" &&
         this.validate.test !== undefined
       ) {
-        return this.validate.test(tagValue)
+        return this.validate.test(tagValue);
       }
-      return true
+
+      return true;
     },
 
-    remove (index) {
-      this.innerTags.splice(index, 1)
-      this.tagChange()
+    remove(index) {
+      this.innerTags.splice(index, 1);
+      this.tagChange();
     },
 
-    removeLastTag () {
+    removeLastTag() {
       if (this.newTag) {
-        return
+        return;
       }
-      this.innerTags.pop()
-      this.tagChange()
+      this.innerTags.pop();
+      this.tagChange();
     },
 
-    tagChange () {
-      this.$emit('update:tags', this.innerTags)
+    tagChange() {
+      this.$emit("update:tags", this.innerTags);
     }
   }
-}
+};
 </script>
 
 <template>
