@@ -25,7 +25,9 @@
     "build": "vue-cli-service build",
     "build-bundle": "vue-cli-service build --target lib --name vueInputTag ./src/components/index.js",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "coveralls": "^3.0.2",
