@@ -33,7 +33,19 @@ body {
  * Correct `block` display not defined for `main` in IE 11.
  */
 
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
   display: block;
 }
 
@@ -42,7 +54,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
 
-audio, canvas, progress, video {
+audio,
+canvas,
+progress,
+video {
   display: inline-block;
   /* 1 */
   vertical-align: baseline;
@@ -64,7 +79,8 @@ audio:not([controls]) {
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
 
-[hidden], template {
+[hidden],
+template {
   display: none;
 }
 
@@ -77,7 +93,8 @@ audio:not([controls]) {
 
 a {
   background-color: transparent;
-  &:active, &:hover {
+  &:active,
+  &:hover {
     outline: 0;
   }
 }
@@ -101,7 +118,8 @@ abbr[title] {
  * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
  */
 
-b, strong {
+b,
+strong {
   font-weight: bold;
 }
 
@@ -214,7 +232,10 @@ pre {
  * Address odd `em`-unit font size rendering in all browsers.
  */
 
-code, kbd, pre, samp {
+code,
+kbd,
+pre,
+samp {
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -234,7 +255,11 @@ code, kbd, pre, samp {
  * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
  */
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   color: inherit;
   /* 1 */
   font: inherit;
@@ -271,7 +296,8 @@ select {
  *    `input` and others.
  */
 
-button, html input[type="button"] {
+button,
+html input[type="button"] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
@@ -279,7 +305,8 @@ button, html input[type="button"] {
 }
 
 input {
-  &[type="reset"], &[type="submit"] {
+  &[type="reset"],
+  &[type="submit"] {
     -webkit-appearance: button;
     /* 2 */
     cursor: pointer;
@@ -291,7 +318,8 @@ input {
  * Re-set default cursor for disabled elements.
  */
 
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 
@@ -310,14 +338,16 @@ input {
     padding: 0;
   }
   line-height: normal;
-  &[type="checkbox"], &[type="radio"] {
+  &[type="checkbox"],
+  &[type="radio"] {
     box-sizing: border-box;
     /* 1 */
     padding: 0;
     /* 2 */
   }
   &[type="number"] {
-    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
       height: auto;
     }
   }
@@ -326,7 +356,8 @@ input {
     /* 1 */
     /* 2 */
     box-sizing: content-box;
-    &::-webkit-search-cancel-button, &::-webkit-search-decoration {
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
       -webkit-appearance: none;
     }
   }
@@ -414,6 +445,7 @@ table {
   border-spacing: 0;
 }
 
-td, th {
+td,
+th {
   padding: 0;
 }
