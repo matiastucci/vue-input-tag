@@ -1,18 +1,17 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #606c71;
 }
 
 a {
-  color: #1e6bb8;
-  text-decoration: none;
+  color: #fff;
 }
 a:hover {
-  text-decoration: underline;
+  opacity: 0.8;
 }
 
 .btn {
@@ -25,6 +24,7 @@ a:hover {
   border-width: 1px;
   border-radius: 0.3rem;
   transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  text-decoration: none;
 }
 .btn + .btn {
   margin-left: 1rem;
@@ -127,7 +127,12 @@ a:hover {
 .main-content img {
   max-width: 100%;
 }
-.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-weight: normal;
@@ -184,7 +189,8 @@ a:hover {
   line-height: 1.45;
   border-radius: 0.3rem;
 }
-.main-content pre code, .main-content pre tt {
+.main-content pre code,
+.main-content pre tt {
   display: inline;
   max-width: initial;
   padding: 0;
@@ -195,13 +201,16 @@ a:hover {
   background-color: transparent;
   border: 0;
 }
-.main-content pre code:before, .main-content pre code:after {
+.main-content pre code:before,
+.main-content pre code:after {
   content: normal;
 }
-.main-content pre tt:before, .main-content pre tt:after {
+.main-content pre tt:before,
+.main-content pre tt:after {
   content: normal;
 }
-.main-content ul, .main-content ol {
+.main-content ul,
+.main-content ol {
   margin-top: 0;
 }
 .main-content blockquote {
