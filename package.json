@@ -43,5 +43,9 @@
     "babel-jest": "^23.0.1",
     "gh-pages": "^1.2.0",
     "vue-template-compiler": "^2.5.17"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 4.0.0"
   }
 }
