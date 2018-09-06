@@ -25,8 +25,6 @@ npm install vue-input-tag --save
 yarn add vue-input-tag
 ```
 
-Register the component
-
 ## Register the component
 
 ```js
@@ -34,13 +32,13 @@ import InputTag from 'vue-input-tag'
 ```
 
 ```js
-Vue.component('InputTag', InputTag)
+Vue.component('input-tag', InputTag)
 ```
 
 ## Usage
 
 ```html
-<InputTag :tags.sync="tagsArray"/>
+<input-tag :tags.sync="tagsArray"></input-tag>
 ```
 
 ## Props
