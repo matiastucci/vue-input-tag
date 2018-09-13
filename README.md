@@ -25,6 +25,17 @@ npm install vue-input-tag --save
 yarn add vue-input-tag
 ```
 
+#### CDN
+
+```html
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vue-input-tag"></script>
+```
+
+Then register the component in your javascript:
+
+`Vue.component('input-tag', vueInputTag.default)`
+
 ## Register the component
 
 ```js
