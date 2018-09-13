@@ -1,6 +1,6 @@
 {
   "name": "vue-input-tag",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Vue.js input tag editor component",
   "keywords": [
     "vueinputtag",
@@ -13,6 +13,7 @@
   "homepage": "https://matiastucci.github.io/vue-input-tag",
   "license": "MIT",
   "main": "./dist/vueInputTag.common.js",
+  "unpkg": "./dist/vueInputTag.umd.min.js",
   "files": [
     "dist/*",
     "src/*",
