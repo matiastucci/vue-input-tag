@@ -13,6 +13,7 @@
   "homepage": "https://matiastucci.github.io/vue-input-tag",
   "license": "MIT",
   "main": "./dist/vueInputTag.common.js",
+  "unpkg": "./dist/vueInputTag.umd.min.js",
   "files": [
     "dist/*",
     "src/*",
