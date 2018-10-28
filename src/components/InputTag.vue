@@ -118,6 +118,8 @@ export default {
         this.innerTags.push(this.newTag);
         this.newTag = "";
         this.tagChange();
+
+        e.preventDefault()
       }
     },
 
