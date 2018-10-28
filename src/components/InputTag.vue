@@ -19,7 +19,7 @@ export default {
   name: "InputTag",
 
   props: {
-    tags: {
+    value: {
       type: Array,
       default: () => []
     },
@@ -62,15 +62,9 @@ export default {
   data() {
     return {
       newTag: "",
-      innerTags: [...this.tags],
+      innerTags: [...this.value],
       isInputActive: false
     };
-  },
-
-  watch: {
-    tags() {
-      this.innerTags = [...this.tags];
-    }
   },
 
   computed: {
@@ -119,7 +113,7 @@ export default {
         this.newTag = "";
         this.tagChange();
 
-        e.preventDefault()
+        e && e.preventDefault();
       }
     },
 
@@ -164,6 +158,7 @@ export default {
 
     tagChange() {
       this.$emit("update:tags", this.innerTags);
+      this.$emit("input", this.innerTags);
     }
   }
 };

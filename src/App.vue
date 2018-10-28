@@ -25,7 +25,7 @@ export default {
     getPreviewHTML() {
       let html = "<input-tag";
       html += this.placeholder ? ` placeholder="${this.placeholder}"` : "";
-      html += this.tags ? ' :tags.sync="tags"' : "";
+      html += ' v-model="tags"';
       html += this.readOnly ? ' :read-only="true"' : "";
       html += this.addTagOnBlur ? ' :add-tag-on-blur="true"' : "";
       html += this.allowDuplicates ? ' :allow-duplicates="true"' : "";
@@ -93,7 +93,7 @@ export default {
 
           <InputTag
             :limit='limit'
-            :tags.sync='tags'
+            v-model='tags'
             :placeholder='placeholder'
             :read-only='readOnly'
             :validate='validate'

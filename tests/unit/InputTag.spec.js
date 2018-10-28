@@ -47,6 +47,10 @@ describe("InputTag.vue", () => {
       expect(wrapper.emitted()["update:tags"]).toBeTruthy();
     });
 
+    it("should emmit an input event", () => {
+      expect(wrapper.emitted()["input"]).toBeTruthy();
+    });
+
     it("should have 2 remove tag buttons", () => {
       expect(wrapper.findAll("a.remove").length).toEqual(2);
     });
@@ -138,10 +142,10 @@ describe("InputTag.vue", () => {
       });
     });
 
-    describe("tags='[1, 2, 3]'", () => {
+    describe("value='[1, 2, 3]'", () => {
       beforeEach(() => {
         wrapper = shallowMount(InputTag, {
-          propsData: { tags: [1, 2, 3] }
+          propsData: { value: [1, 2, 3] }
         });
       });
 

@@ -47,7 +47,7 @@ Then you need to register it:
 ## Usage
 
 ```html
-<input-tag :tags.sync="tagsArray"></input-tag>
+<input-tag v-model="tags"></input-tag>
 ```
 
 ## Props
