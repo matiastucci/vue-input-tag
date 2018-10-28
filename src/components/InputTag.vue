@@ -19,10 +19,6 @@ export default {
   name: "InputTag",
 
   props: {
-    tags: {
-      type: Array,
-      default: () => []
-    },
     value: {
       type: Array,
       default: () => []
@@ -66,15 +62,9 @@ export default {
   data() {
     return {
       newTag: "",
-      innerTags: this.tags.concat(this.value),
+      innerTags: [...this.value],
       isInputActive: false
     };
-  },
-
-  watch: {
-    tags() {
-      this.innerTags = [...this.tags];
-    }
   },
 
   computed: {
@@ -123,7 +113,7 @@ export default {
         this.newTag = "";
         this.tagChange();
 
-        e.preventDefault()
+        e && e.preventDefault();
       }
     },
 
