@@ -23,6 +23,10 @@ export default {
       type: Array,
       default: () => []
     },
+    value: {
+      type: Array,
+      default: () => []
+    },
     placeholder: {
       type: String,
       default: ""
@@ -62,7 +66,7 @@ export default {
   data() {
     return {
       newTag: "",
-      innerTags: [...this.tags],
+      innerTags: this.tags.concat(this.value),
       isInputActive: false
     };
   },
@@ -162,6 +166,7 @@ export default {
 
     tagChange() {
       this.$emit("update:tags", this.innerTags);
+      this.$emit("input", this.innerTags);
     }
   }
 };

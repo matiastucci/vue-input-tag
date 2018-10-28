@@ -13,13 +13,11 @@
 
 ## Installation
 
-#### NPM
+#### NPM / Yarn
 
 ```bash
 npm install vue-input-tag --save
 ```
-
-#### Yarn
 
 ```bash
 yarn add vue-input-tag
