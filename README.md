@@ -56,8 +56,8 @@ Then you need to register it:
 | tags | Array | [] | Tags to be render in the input |
 | placeholder | String | "" | Placeholder to be shown when no tags |
 | read-only | Boolean | false | Set input to readonly |
-| addTagOnBlur | Boolean | false | Add tag on input blur |
+| add-tag-on-blur | Boolean | false | Add tag on input blur |
 | limit | String or Number | -1 (none) | Set a limit for the amount of tags |
 | validate | String or Function or Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate`. Or pass a `function` or a `RegExp` object for custom validation |
-| addTagOnKeys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
-| allowDuplicates | Boolean | false | Allow duplicate tags
+| add-tag-on-keys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
+| allow-duplicates | Boolean | false | Allow duplicate tags
