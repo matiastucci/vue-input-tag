@@ -175,7 +175,9 @@ export default {
   >
     <span v-for="(tag, index) in innerTags" :key="index" class="input-tag">
       <span>{{ tag }}</span>
-      <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
+      <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove">
+        <slot name="remove-icon" />
+      </a>
     </span>
     <input
       v-if                     = "!readOnly && !isLimit"
@@ -229,7 +231,7 @@ export default {
   text-decoration: none;
 }
 
-.vue-input-tag-wrapper .input-tag .remove::before {
+.vue-input-tag-wrapper .input-tag .remove:empty::before {
   content: " x";
 }
 
