@@ -75,7 +75,7 @@ export default {
 
   watch: {
     value() {
-      this.innerTags = [...this.value]
+      this.innerTags = [...this.value];
     }
   },
 
