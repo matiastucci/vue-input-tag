@@ -73,6 +73,12 @@ export default {
     }
   },
 
+  watch: {
+    value() {
+      this.innerTags = [...this.value]
+    }
+  },
+
   methods: {
     focusNewTag() {
       if (this.readOnly || !this.$el.querySelector(".new-tag")) {
