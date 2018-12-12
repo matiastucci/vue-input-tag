@@ -302,4 +302,22 @@ describe("InputTag.vue", () => {
       ).toBeUndefined();
     });
   });
+
+  describe("slots", () => {
+    beforeEach(() => {
+      wrapper = shallowMount(InputTag, {
+        slots: {
+          "remove-icon": '<span class="close" />'
+        }
+      });
+
+      addTag(wrapper, "foo");
+    });
+
+    it("should render 'remove icon' slot as remove icon for a tag", () => {
+      expect(wrapper.find("a.remove").html()).toBe(
+        '<a class="remove"><span class="close"></span></a>'
+      );
+    });
+  });
 });
