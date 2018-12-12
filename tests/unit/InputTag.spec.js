@@ -154,6 +154,19 @@ describe("InputTag.vue", () => {
       });
     });
 
+    describe("dynamic value", () => {
+      beforeEach(() => {
+        wrapper = shallowMount(InputTag, {
+          propsData: { value: [1, 2, 3] }
+        });
+      });
+
+      it("should watch value property changes", () => {
+        wrapper.setProps({ value: [1, 2, 3, 4] });
+        expect(wrapper.vm.innerTags.length).toEqual(4);
+      });
+    });
+
     describe("validate='text'", () => {
       beforeEach(() => {
         wrapper = shallowMount(InputTag, {
