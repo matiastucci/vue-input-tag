@@ -53,7 +53,7 @@ Then you need to register it:
 ## Props
 | Name | Type | Default | Description |
 | ---:| --- | ---| --- |
-| tags | Array | [] | Tags to be render in the input |
+| value | Array | [] | Tags to be render in the input |
 | placeholder | String | "" | Placeholder to be shown when no tags |
 | read-only | Boolean | false | Set input to readonly |
 | add-tag-on-blur | Boolean | false | Add tag on input blur |

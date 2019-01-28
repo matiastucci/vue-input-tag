@@ -154,6 +154,19 @@ describe("InputTag.vue", () => {
       });
     });
 
+    describe("dynamic value", () => {
+      beforeEach(() => {
+        wrapper = shallowMount(InputTag, {
+          propsData: { value: [1, 2, 3] }
+        });
+      });
+
+      it("should watch value property changes", () => {
+        wrapper.setProps({ value: [1, 2, 3, 4] });
+        expect(wrapper.vm.innerTags.length).toEqual(4);
+      });
+    });
+
     describe("validate='text'", () => {
       beforeEach(() => {
         wrapper = shallowMount(InputTag, {
@@ -287,6 +300,24 @@ describe("InputTag.vue", () => {
       expect(
         vueInputTagWrapper.classes()["vue-input-tag-wrapper--active"]
       ).toBeUndefined();
+    });
+  });
+
+  describe("slots", () => {
+    beforeEach(() => {
+      wrapper = shallowMount(InputTag, {
+        slots: {
+          "remove-icon": '<span class="close" />'
+        }
+      });
+
+      addTag(wrapper, "foo");
+    });
+
+    it("should render 'remove icon' slot as remove icon for a tag", () => {
+      expect(wrapper.find("a.remove").html()).toBe(
+        '<a class="remove"><span class="close"></span></a>'
+      );
     });
   });
 });
