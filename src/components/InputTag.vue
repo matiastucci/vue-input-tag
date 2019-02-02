@@ -49,6 +49,10 @@ export default {
       type: Boolean,
       default: false
     },
+    trim: {
+      type: Boolean,
+      default: false
+    },
     limit: {
       type: Number,
       default: -1
@@ -110,12 +114,14 @@ export default {
         return;
       }
 
+      const tag = this.trim ? this.newTag.trim() : this.newTag;
+
       if (
-        this.newTag &&
-        (this.allowDuplicates || this.innerTags.indexOf(this.newTag) === -1) &&
-        this.validateIfNeeded(this.newTag)
+        tag &&
+        (this.allowDuplicates || this.innerTags.indexOf(tag) === -1) &&
+        this.validateIfNeeded(tag)
       ) {
-        this.innerTags.push(this.newTag);
+        this.innerTags.push(tag);
         this.newTag = "";
         this.tagChange();
 

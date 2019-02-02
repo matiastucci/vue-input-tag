@@ -13,6 +13,7 @@ export default {
       readOnly: false,
       addTagOnBlur: false,
       allowDuplicates: false,
+      trim: false,
       placeholder: "Add Tag",
       tags: ["Jerry", "Kramer", "Elaine", "George"],
       limit: 10,
@@ -27,6 +28,7 @@ export default {
       html += this.placeholder ? ` placeholder="${this.placeholder}"` : "";
       html += ' v-model="tags"';
       html += this.readOnly ? ' :read-only="true"' : "";
+      html += this.trim ? ' trim' : "";
       html += this.addTagOnBlur ? ' :add-tag-on-blur="true"' : "";
       html += this.allowDuplicates ? ' :allow-duplicates="true"' : "";
       html += this.limit ? ' :limit="limit"' : "";
@@ -59,6 +61,10 @@ export default {
         <div class="form-group">
           <p class="label">readOnly:</p>
           <input v-model="readOnly" type="checkbox"/>
+        </div>
+        <div class="form-group">
+          <p class="label">trim:</p>
+          <input v-model="trim" type="checkbox"/>
         </div>
         <div class="form-group">
           <p class="label">addTagOnBlur:</p>
@@ -97,6 +103,7 @@ export default {
             :placeholder='placeholder'
             :read-only='readOnly'
             :validate='validate'
+            :trim="trim"
             :add-tag-on-blur='addTagOnBlur'
           />
 

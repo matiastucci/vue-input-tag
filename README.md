@@ -55,6 +55,7 @@ Then you need to register it:
 | ---:| --- | ---| --- |
 | value | Array | [] | Tags to be render in the input |
 | placeholder | String | "" | Placeholder to be shown when no tags |
+| trim | Boolean | false | Trims input tags from whitespaces |
 | read-only | Boolean | false | Set input to readonly |
 | add-tag-on-blur | Boolean | false | Add tag on input blur |
 | limit | String or Number | -1 (none) | Set a limit for the amount of tags |
