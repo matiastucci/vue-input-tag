@@ -61,4 +61,4 @@ Then you need to register it:
 | validate | String or Function or Object | "" | Apply certain validator for user input. Choose from `email`, `url`, `text`, `digits` or `isodate`. Or pass a `function` or a `RegExp` object for custom validation |
 | add-tag-on-keys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
 | allow-duplicates | Boolean | false | Allow duplicate tags
-| before-adding | Function | null | Function to normalize tag before adding. E.g (tag) => tag.toUpperCase()
+| before-adding | Function | null | Function to normalize tag before adding. E.g `(tag) => tag.toUpperCase()`
