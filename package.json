@@ -1,6 +1,6 @@
 {
   "name": "vue-input-tag",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Vue.js input tag editor component",
   "keywords": [
     "vueinputtag",
@@ -28,7 +28,8 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "prepublishOnly": "npm run build-bundle"
   },
   "dependencies": {
     "coveralls": "^3.0.2",
