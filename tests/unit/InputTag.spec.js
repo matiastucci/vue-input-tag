@@ -276,6 +276,20 @@ describe("InputTag.vue", () => {
         expect(wrapper.vm.innerTags[0]).toEqual("2002-04-03");
       });
     });
+
+    describe("before-adding", () => {
+      beforeEach(() => {
+        wrapper = shallowMount(InputTag, {
+          propsData: { beforeAdding: tag => tag.toUpperCase() }
+        });
+
+        addTag(wrapper, "new tag");
+      });
+
+      it("should have an uppercase tag", () => {
+        expect(wrapper.vm.innerTags[0]).toEqual("NEW TAG");
+      });
+    });
   });
 
   describe("CSS classes", () => {

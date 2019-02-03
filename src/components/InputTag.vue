@@ -56,6 +56,9 @@ export default {
     allowDuplicates: {
       type: Boolean,
       default: false
+    },
+    beforeAdding: {
+      type: Function
     }
   },
 
@@ -110,12 +113,16 @@ export default {
         return;
       }
 
+      const tag = this.beforeAdding
+        ? this.beforeAdding(this.newTag)
+        : this.newTag;
+
       if (
-        this.newTag &&
-        (this.allowDuplicates || this.innerTags.indexOf(this.newTag) === -1) &&
-        this.validateIfNeeded(this.newTag)
+        tag &&
+        (this.allowDuplicates || this.innerTags.indexOf(tag) === -1) &&
+        this.validateIfNeeded(tag)
       ) {
-        this.innerTags.push(this.newTag);
+        this.innerTags.push(tag);
         this.newTag = "";
         this.tagChange();
 
