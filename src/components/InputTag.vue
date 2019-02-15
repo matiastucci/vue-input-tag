@@ -99,7 +99,7 @@ export default {
       this.addNew(e);
     },
 
-    addNew(e) {
+    async addNew(e) {
       const keyShouldAddTag = e
         ? this.addTagOnKeys.indexOf(e.keyCode) !== -1
         : true;
@@ -114,13 +114,15 @@ export default {
       }
 
       const tag = this.beforeAdding
-        ? this.beforeAdding(this.newTag)
+        ? await this.beforeAdding(this.newTag)
         : this.newTag;
+
+        const valid = await this.validateIfNeeded(tag);
 
       if (
         tag &&
         (this.allowDuplicates || this.innerTags.indexOf(tag) === -1) &&
-        this.validateIfNeeded(tag)
+        valid
       ) {
         this.innerTags.push(tag);
         this.newTag = "";
