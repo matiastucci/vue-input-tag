@@ -1,5 +1,6 @@
 # vue-input-tag
 > A Vue.js 2.0 input tag component inspired in [react-tagsinput](https://github.com/olahol/react-tagsinput)
+
 [![Codeship Status for matiastucci/vue-input-tag](https://app.codeship.com/projects/0f715410-172a-0137-7928-063230c44fa3/status?branch=master)](https://app.codeship.com/projects/328055)
 [![Coverage Status](https://coveralls.io/repos/github/matiastucci/vue-input-tag/badge.svg?branch=master)](https://coveralls.io/github/matiastucci/vue-input-tag?branch=master)
 [![Version](https://img.shields.io/npm/v/vue-input-tag.svg)](https://www.npmjs.com/package/vue-input-tag)
