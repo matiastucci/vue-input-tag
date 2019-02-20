@@ -62,3 +62,4 @@ Then you need to register it:
 | add-tag-on-keys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
 | allow-duplicates | Boolean | false | Allow duplicate tags
 | before-adding | Function | null | Function (allows async) to normalize tag before adding. E.g `(tag) => tag.toUpperCase()`
+
