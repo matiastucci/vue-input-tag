@@ -1,7 +1,6 @@
 # vue-input-tag
 > A Vue.js 2.0 input tag component inspired in [react-tagsinput](https://github.com/olahol/react-tagsinput)
-
-[![Codeship](https://img.shields.io/codeship/3a192ae0-9502-0134-8f6e-1e693cf3975e/master.svg)]()
+[![Codeship Status for matiastucci/vue-input-tag](https://app.codeship.com/projects/0f715410-172a-0137-7928-063230c44fa3/status?branch=master)](https://app.codeship.com/projects/328055)
 [![Coverage Status](https://coveralls.io/repos/github/matiastucci/vue-input-tag/badge.svg?branch=master)](https://coveralls.io/github/matiastucci/vue-input-tag?branch=master)
 [![Version](https://img.shields.io/npm/v/vue-input-tag.svg)](https://www.npmjs.com/package/vue-input-tag)
 [![License](https://img.shields.io/npm/l/vue-input-tag.svg)](https://www.npmjs.com/package/vue-input-tag)
@@ -62,4 +61,3 @@ Then you need to register it:
 | add-tag-on-keys | Array | [ 13 (return), 188 (comma), 9 (tab) ] | Keys that are going to add the new tag
 | allow-duplicates | Boolean | false | Allow duplicate tags
 | before-adding | Function | null | Function (allows async) to normalize tag before adding. E.g `(tag) => tag.toUpperCase()`
-
