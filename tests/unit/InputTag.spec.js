@@ -1,11 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
 import InputTag from "@/components/InputTag.vue";
 
-function addTag(wrapper, newTag) {
+async function addTag(wrapper, newTag) {
   // TODO: use wrapper.trigger('keydown', { which: 65 })
   // so we have an event on the vm.addNew method
   wrapper.setData({ newTag });
-  wrapper.vm.addNew();
+  await wrapper.vm.addNew();
 }
 
 describe("InputTag.vue", () => {
@@ -21,10 +21,10 @@ describe("InputTag.vue", () => {
   });
 
   describe("addNew()", () => {
-    beforeEach(() => {
-      addTag(wrapper, "tag 1");
-      addTag(wrapper, "tag 1");
-      addTag(wrapper, "tag 2");
+    beforeEach(async () => {
+      await addTag(wrapper, "tag 1");
+      await addTag(wrapper, "tag 1");
+      await addTag(wrapper, "tag 2");
     });
 
     it("should have 2 tags", () => {
@@ -57,10 +57,10 @@ describe("InputTag.vue", () => {
   });
 
   describe("remove(index)", () => {
-    beforeEach(() => {
-      addTag(wrapper, "tag 1");
-      addTag(wrapper, "tag 2");
-      addTag(wrapper, "tag 3");
+    beforeEach(async () => {
+      await addTag(wrapper, "tag 1");
+      await addTag(wrapper, "tag 2");
+      await addTag(wrapper, "tag 3");
 
       wrapper.vm.remove(1);
     });
@@ -79,12 +79,13 @@ describe("InputTag.vue", () => {
   });
 
   describe("removeLastTag()", () => {
-    beforeEach(() => {
-      addTag(wrapper, "tag 1");
-      addTag(wrapper, "tag 2");
-      addTag(wrapper, "tag 3");
+    beforeEach(async () => {
+      await addTag(wrapper, "tag 1");
+      await addTag(wrapper, "tag 2");
+      await addTag(wrapper, "tag 3");
 
       wrapper.vm.removeLastTag();
+      console.log(wrapper.vm.innerTags);
     });
 
     it("should have 2 tags", () => {
