@@ -117,12 +117,12 @@ export default {
         ? await this.beforeAdding(this.newTag)
         : this.newTag;
 
-        const valid = await this.validateIfNeeded(tag);
+      const isValid = await this.validateIfNeeded(tag);
 
       if (
         tag &&
-        (this.allowDuplicates || this.innerTags.indexOf(tag) === -1) &&
-        valid
+        isValid &&
+        (this.allowDuplicates || this.innerTags.indexOf(tag) === -1)
       ) {
         this.innerTags.push(tag);
         this.newTag = "";
