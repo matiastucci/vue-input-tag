@@ -1,6 +1,6 @@
 {
   "name": "vue-input-tag",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Vue.js input tag editor component",
   "keywords": [
     "vueinputtag",
@@ -32,8 +32,6 @@
     "prepublishOnly": "npm run build-bundle"
   },
   "dependencies": {
-    "coveralls": "^3.0.2",
-    "ferrocarriloeste": "^1.0.1",
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -44,6 +42,8 @@
     "@vue/eslint-config-prettier": "^3.0.1",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
+    "coveralls": "^3.0.3",
+    "ferrocarriloeste": "^1.0.1",
     "gh-pages": "^1.2.0",
     "vue-template-compiler": "^2.5.17"
   },
