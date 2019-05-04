@@ -1427,7 +1427,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@^23.0.1, babel-jest@^23.4.0, babel-jest@^23.4.2:
+babel-jest@^23.4.0, babel-jest@^23.4.2:
   version "23.4.2"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-23.4.2.tgz#f276de67798a5d68f2d6e87ff518c2f6e1609877"
   dependencies:
@@ -2264,16 +2264,17 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.9.0"
     parse-json "^4.0.0"
 
-coveralls@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-3.0.2.tgz#f5a0bcd90ca4e64e088b710fa8dda640aea4884f"
+coveralls@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-3.0.3.tgz#83b1c64aea1c6afa69beaf50b55ac1bc4d13e2b8"
+  integrity sha512-viNfeGlda2zJr8Gj1zqXpDMRjw9uM54p7wzZdvLRyOgnAfCe974Dq4veZkjJdxQXbmdppu6flEajFYseHYaUhg==
   dependencies:
     growl "~> 1.10.0"
     js-yaml "^3.11.0"
     lcov-parse "^0.0.10"
     log-driver "^1.2.7"
     minimist "^1.2.0"
-    request "^2.85.0"
+    request "^2.86.0"
 
 create-ecdh@^4.0.0:
   version "4.0.3"
@@ -3327,6 +3328,7 @@ fb-watchman@^2.0.0:
 ferrocarriloeste@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ferrocarriloeste/-/ferrocarriloeste-1.0.1.tgz#1613d81db8e79e451cda372ae40db97680e5da0c"
+  integrity sha1-FhPYHbjnnkUc2jcq5A25doDl2gw=
 
 figgy-pudding@^3.5.1:
   version "3.5.1"
@@ -6712,7 +6714,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.3"
 
-request@^2.85.0, request@^2.87.0:
+request@^2.86.0, request@^2.87.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   dependencies:
