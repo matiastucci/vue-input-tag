@@ -124,7 +124,11 @@ export default {
         isValid &&
         (this.allowDuplicates || this.innerTags.indexOf(tag) === -1)
       ) {
-        this.innerTags.push(tag);
+        const position = [].indexOf.call(
+          this.$el.childNodes,
+          this.$refs.inputtag
+        );
+        this.innerTags.splice(position, 0, tag);
         this.newTag = "";
         this.tagChange();
 
