@@ -171,6 +171,38 @@ export default {
       this.tagChange();
     },
 
+    moveInputHome() {
+      const inputtag = this.$refs.inputtag;
+      if (inputtag.previousElementSibling) {
+        this.$el.prepend(inputtag);
+        this.focusNewTag();
+      }
+    },
+
+    moveInputLeft() {
+      const inputtag = this.$refs.inputtag;
+      if (inputtag.previousElementSibling) {
+        this.$el.insertBefore(inputtag, inputtag.previousElementSibling);
+        this.focusNewTag();
+      }
+    },
+
+    moveInputRight() {
+      const inputtag = this.$refs.inputtag;
+      if (inputtag.nextElementSibling) {
+        this.$el.insertBefore(inputtag.nextElementSibling, inputtag);
+        this.focusNewTag();
+      }
+    },
+
+    moveInputEnd() {
+      const inputtag = this.$refs.inputtag;
+      if (inputtag.nextElementSibling) {
+        this.$el.appendChild(inputtag);
+        this.focusNewTag();
+      }
+    },
+
     tagChange() {
       this.$emit("update:tags", this.innerTags);
       this.$emit("input", this.innerTags);
@@ -201,6 +233,10 @@ export default {
       type                     = "text"
       v-model                  = "newTag"
       v-on:keydown.delete.stop = "removeLastTag"
+      v-on:keydown.home        = "moveInputHome"
+      v-on:keydown.left        = "moveInputLeft"
+      v-on:keydown.right       = "moveInputRight"
+      v-on:keydown.end         = "moveInputEnd"
       v-on:keydown             = "addNew"
       v-on:blur                = "handleInputBlur"
       v-on:focus               = "handleInputFocus"
