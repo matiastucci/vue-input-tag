@@ -32,11 +32,11 @@ describe("InputTag.vue", () => {
     });
 
     it("should have a 'tag 1'", () => {
-      expect(wrapper.vm.innerTags[0]).toEqual("tag 1");
+      expect(wrapper.vm.innerTags[0].text).toEqual("tag 1");
     });
 
     it("should have a 'tag 2'", () => {
-      expect(wrapper.vm.innerTags[1]).toEqual("tag 2");
+      expect(wrapper.vm.innerTags[1].text).toEqual("tag 2");
     });
 
     it("should reset the new tag", () => {
@@ -70,11 +70,11 @@ describe("InputTag.vue", () => {
     });
 
     it("should have a 'tag 1'", () => {
-      expect(wrapper.vm.innerTags[0]).toEqual("tag 1");
+      expect(wrapper.vm.innerTags[0].text).toEqual("tag 1");
     });
 
     it("should have a 'tag 3'", () => {
-      expect(wrapper.vm.innerTags[1]).toEqual("tag 3");
+      expect(wrapper.vm.innerTags[1].text).toEqual("tag 3");
     });
   });
 
@@ -93,11 +93,11 @@ describe("InputTag.vue", () => {
     });
 
     it("should have a 'tag 1'", () => {
-      expect(wrapper.vm.innerTags[0]).toEqual("tag 1");
+      expect(wrapper.vm.innerTags[0].text).toEqual("tag 1");
     });
 
     it("should have a 'tag 2'", () => {
-      expect(wrapper.vm.innerTags[1]).toEqual("tag 2");
+      expect(wrapper.vm.innerTags[1].text).toEqual("tag 2");
     });
   });
 
@@ -117,7 +117,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have a 'tag 1'", () => {
-        expect(wrapper.vm.innerTags[2]).toEqual("tag 1");
+        expect(wrapper.vm.innerTags[2].text).toEqual("tag 1");
       });
     });
 
@@ -186,7 +186,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have a tag 'foo'", () => {
-        expect(wrapper.vm.innerTags[0]).toEqual("foo");
+        expect(wrapper.vm.innerTags[0].text).toEqual("foo");
       });
     });
 
@@ -208,7 +208,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have a tag '123'", () => {
-        expect(wrapper.vm.innerTags[0]).toEqual("123");
+        expect(wrapper.vm.innerTags[0].text).toEqual("123");
       });
     });
 
@@ -230,7 +230,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have a tag 'mati@tucci.me'", () => {
-        expect(wrapper.vm.innerTags[0]).toEqual("mati@tucci.me");
+        expect(wrapper.vm.innerTags[0].text).toEqual("mati@tucci.me");
       });
     });
 
@@ -252,7 +252,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have a tag 'https://tucci.me'", () => {
-        expect(wrapper.vm.innerTags[0]).toEqual("https://tucci.me");
+        expect(wrapper.vm.innerTags[0].text).toEqual("https://tucci.me");
       });
     });
 
@@ -274,7 +274,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have a tag '2002-04-03'", () => {
-        expect(wrapper.vm.innerTags[0]).toEqual("2002-04-03");
+        expect(wrapper.vm.innerTags[0].text).toEqual("2002-04-03");
       });
     });
 
@@ -288,7 +288,7 @@ describe("InputTag.vue", () => {
       });
 
       it("should have an uppercase tag", () => {
-        expect(wrapper.vm.innerTags[0]).toEqual("NEW TAG");
+        expect(wrapper.vm.innerTags[0].text).toEqual("NEW TAG");
       });
     });
   });

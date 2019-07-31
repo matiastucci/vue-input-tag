@@ -65,7 +65,9 @@ export default {
   data() {
     return {
       newTag: "",
-      innerTags: [...this.value],
+      innerTags: [...this.value].map(v => {
+        return { id: this.getUniqueId(), text: v };
+      }),
       isInputActive: false
     };
   },
@@ -78,11 +80,21 @@ export default {
 
   watch: {
     value() {
-      this.innerTags = [...this.value];
+      this.innerTags = [...this.value].map(v => {
+        return { id: this.getUniqueId(), text: v };
+      });
     }
   },
 
   methods: {
+    getUniqueId() {
+      return (
+        Math.random()
+          .toString(36)
+          .substring(2) + Date.now().toString(36)
+      );
+    },
+
     focusNewTag() {
       if (this.readOnly || !this.$el.querySelector(".new-tag")) {
         return;
@@ -122,13 +134,14 @@ export default {
       if (
         tag &&
         isValid &&
-        (this.allowDuplicates || this.innerTags.indexOf(tag) === -1)
+        (this.allowDuplicates ||
+          this.innerTags.map(el => el.text).indexOf(tag) === -1)
       ) {
         const position = [].indexOf.call(
           this.$el.childNodes,
           this.$refs.inputtag
         );
-        this.innerTags.splice(position, 0, tag);
+        this.innerTags.splice(position, 0, { id: this.getUniqueId(), text: tag });
         this.newTag = "";
         this.tagChange();
 
@@ -211,8 +224,8 @@ export default {
     },
 
     tagChange() {
-      this.$emit("update:tags", this.innerTags);
-      this.$emit("input", this.innerTags);
+      this.$emit("update:tags", this.innerTags.map(el => el.text));
+      this.$emit("input", this.innerTags.map(el => el.text));
     }
   }
 };
@@ -227,8 +240,8 @@ export default {
     }"
     class="vue-input-tag-wrapper"
   >
-    <span v-for="(tag, index) in innerTags" :key="index" class="input-tag">
-      <span>{{ tag }}</span>
+    <span v-for="(tag, index) in innerTags" :key="tag.id" class="input-tag">
+      <span>{{ tag.text }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove">
         <slot name="remove-icon" />
       </a>
