@@ -185,7 +185,7 @@ export default {
 
     moveInputLeft() {
       const inputtag = this.$refs.inputtag;
-      if (inputtag.previousElementSibling) {
+      if (inputtag.previousElementSibling && inputtag.selectionStart == 0) {
         this.$el.insertBefore(inputtag, inputtag.previousElementSibling);
         this.focusNewTag();
       }
@@ -193,7 +193,10 @@ export default {
 
     moveInputRight() {
       const inputtag = this.$refs.inputtag;
-      if (inputtag.nextElementSibling) {
+      if (
+        inputtag.nextElementSibling &&
+        inputtag.selectionEnd == inputtag.textLength
+      ) {
         this.$el.insertBefore(inputtag.nextElementSibling, inputtag);
         this.focusNewTag();
       }
