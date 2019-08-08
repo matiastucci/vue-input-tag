@@ -335,4 +335,23 @@ describe("InputTag.vue", () => {
       );
     });
   });
+
+  describe("move input box", () => {
+    beforeEach(async () => {
+      await addTag(wrapper, "tag B");
+      await addTag(wrapper, "tag D");
+      await addTag(wrapper, "tag F");
+    });
+
+    // FIXME events in "it" don't work 
+    (false ? it : it.skip)("should add a tag before the last one", () => {
+      const input = wrapper.find("input.new-tag");
+      input.trigger("focus");
+      input.trigger("keydown.left");
+      input.trigger("keydown", {key: 'E'});
+      input.trigger("keydown.enter");
+      expect(wrapper.findAll(".input-tag").length).toEqual(4);
+      expect(wrapper.vm.innerTags.length).toEqual(4);
+    });
+  });
 });
