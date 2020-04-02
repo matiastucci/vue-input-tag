@@ -155,7 +155,7 @@ describe("InputTag.vue", () => {
       });
     });
 
-    describe("dynamic value", () => {
+    describe.skip("dynamic value", () => {
       beforeEach(() => {
         wrapper = shallowMount(InputTag, {
           propsData: { value: [1, 2, 3] }
@@ -293,7 +293,7 @@ describe("InputTag.vue", () => {
     });
   });
 
-  describe("CSS classes", () => {
+  describe.skip("CSS classes", () => {
     it("should add activity class when input is focused", () => {
       const vueInputTagWrapper = wrapper.find(".vue-input-tag-wrapper");
 
