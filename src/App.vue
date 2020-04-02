@@ -41,8 +41,24 @@ export default {
   <div id="app">
     <section class="page-header">
       <h1 class="project-name">Vue Input Tag</h1>
-      <p>Vue.js 2.0 component, inspired in&nbsp;<a href="https://github.com/olahol/react-tagsinput" target="_blank">react-tagsinput</a></p>
-      <a href="https://github.com/matiastucci/vue-input-tag" target="_blank" class="btn">GitHub</a><a href="https://www.npmjs.com/package/vue-input-tag" target="_blank" class="btn">NPM</a>
+      <p>
+        Vue.js 2.0 component, inspired in&nbsp;<a
+          href="https://github.com/olahol/react-tagsinput"
+          target="_blank"
+          >react-tagsinput</a
+        >
+      </p>
+      <a
+        href="https://github.com/matiastucci/vue-input-tag"
+        target="_blank"
+        class="btn"
+        >GitHub</a
+      ><a
+        href="https://www.npmjs.com/package/vue-input-tag"
+        target="_blank"
+        class="btn"
+        >NPM</a
+      >
     </section>
 
     <section class="main-content">
@@ -54,23 +70,23 @@ export default {
       <div class="playground">
         <div class="form-group">
           <p class="label">placeholder:</p>
-          <input v-model="placeholder" type="text"/>
+          <input v-model="placeholder" type="text" />
         </div>
         <div class="form-group">
           <p class="label">readOnly:</p>
-          <input v-model="readOnly" type="checkbox"/>
+          <input v-model="readOnly" type="checkbox" />
         </div>
         <div class="form-group">
           <p class="label">addTagOnBlur:</p>
-          <input v-model="addTagOnBlur" type="checkbox"/>
+          <input v-model="addTagOnBlur" type="checkbox" />
         </div>
         <div class="form-group">
           <p class="label">allowDuplicates:</p>
-          <input v-model="allowDuplicates" type="checkbox"/>
+          <input v-model="allowDuplicates" type="checkbox" />
         </div>
         <div class="form-group">
           <p class="label">limit:</p>
-          <input v-model="limit" type="number"/>
+          <input v-model="limit" type="number" />
         </div>
         <div class="form-group">
           <p class="label">validate:</p>
@@ -84,7 +100,8 @@ export default {
           </select>
         </div>
         <div class="form-group">
-          <p class="label">tags:</p><code>{{ tags }}</code>
+          <p class="label">tags:</p>
+          <code>{{ tags }}</code>
         </div>
 
         <div>
@@ -92,12 +109,12 @@ export default {
           <h3>Preview</h3>
 
           <InputTag
-            :limit='limit'
-            v-model='tags'
-            :placeholder='placeholder'
-            :read-only='readOnly'
-            :validate='validate'
-            :add-tag-on-blur='addTagOnBlur'
+            :limit="limit"
+            v-model="tags"
+            :placeholder="placeholder"
+            :read-only="readOnly"
+            :validate="validate"
+            :add-tag-on-blur="addTagOnBlur"
           />
 
           <span></span>
@@ -107,8 +124,11 @@ export default {
 
         <footer class="site-footer">
           <span class="site-footer-credits">
-            <a href="https://twitter.com/TucciMatias" target="_blank">@TucciMatias</a>
-            <span>&nbsp;-&nbsp;</span><a href="https://tucci.me" target="_blank">tucci.me</a>
+            <a href="https://twitter.com/TucciMatias" target="_blank"
+              >@TucciMatias</a
+            >
+            <span>&nbsp;-&nbsp;</span
+            ><a href="https://tucci.me" target="_blank">tucci.me</a>
           </span>
         </footer>
       </div>

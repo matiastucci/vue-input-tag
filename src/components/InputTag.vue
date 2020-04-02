@@ -184,7 +184,7 @@ export default {
     @click="focusNewTag()"
     :class="{
       'read-only': readOnly,
-      'vue-input-tag-wrapper--active': isInputActive,
+      'vue-input-tag-wrapper--active': isInputActive
     }"
     class="vue-input-tag-wrapper"
   >
@@ -195,16 +195,16 @@ export default {
       </a>
     </span>
     <input
-      v-if                     = "!readOnly && !isLimit"
-      ref                      = "inputtag"
-      :placeholder             = "placeholder"
-      type                     = "text"
-      v-model                  = "newTag"
-      v-on:keydown.delete.stop = "removeLastTag"
-      v-on:keydown             = "addNew"
-      v-on:blur                = "handleInputBlur"
-      v-on:focus               = "handleInputFocus"
-      class                    = "new-tag"
+      v-if="!readOnly && !isLimit"
+      ref="inputtag"
+      :placeholder="placeholder"
+      type="text"
+      v-model="newTag"
+      v-on:keydown.delete.stop="removeLastTag"
+      v-on:keydown="addNew"
+      v-on:blur="handleInputBlur"
+      v-on:focus="handleInputFocus"
+      class="new-tag"
     />
   </div>
 </template>
