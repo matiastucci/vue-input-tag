@@ -44,7 +44,7 @@
     "babel-core": "7.0.0-bridge.0",
     "coveralls": "^3.0.3",
     "ferrocarriloeste": "^1.0.1",
-    "gh-pages": "^1.2.0",
+    "gh-pages": "^2.2.0",
     "vue-template-compiler": "^2.5.17"
   },
   "engines": {
