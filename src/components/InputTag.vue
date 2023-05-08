@@ -59,6 +59,10 @@ export default {
     },
     beforeAdding: {
       type: Function
+    },
+    maxlength: {
+      type: Number,
+      default: Number.MAX_SAFE_INTEGER
     }
   },
 
@@ -198,6 +202,7 @@ export default {
       v-if="!readOnly && !isLimit"
       ref="inputtag"
       :placeholder="placeholder"
+      :maxlength="maxlength"
       type="text"
       v-model="newTag"
       v-on:keydown.delete.stop="removeLastTag"
